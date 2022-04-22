@@ -1,6 +1,11 @@
 import colors from 'vuetify/es5/util/colors'
 
 export default {
+  server: {
+    host: process.env.HOST || '0.0.0.0',
+    port: process.env.PORT || 4000,
+  },
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: '%s - eCommerceAdmin',
@@ -21,7 +26,9 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [
+    {src:'~/plugins/redirect'}
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
