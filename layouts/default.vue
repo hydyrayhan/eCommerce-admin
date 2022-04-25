@@ -77,9 +77,19 @@ export default {
           to: '/',
         },
         {
+          icon: 'mdi-format-list-bulleted',
+          title: 'Zakaz',
+          to:'/order',
+        },
+        {
           icon: 'mdi-cart-plus',
           title: 'Products',
           to: '/products',
+        },
+        {
+          icon: 'mdi-image-area',
+          title: 'Banners',
+          to: '/banner',
         },
       ],
       miniVariant: false,
