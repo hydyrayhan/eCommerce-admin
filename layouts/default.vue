@@ -1,5 +1,6 @@
 <template>
   <v-app dark>
+    <!-- right navbar -->
     <v-navigation-drawer
       v-model="drawer"
       :mini-variant="miniVariant"
@@ -7,23 +8,72 @@
       fixed
       app
     >
+          <!-- v-for="(item, i) in items"
+          :key="i"
+          :to="item.to" -->
       <v-list>
         <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
+          to="/"
           router
           exact
         >
           <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
+            <v-icon>mdi-apps</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
+            <v-list-item-title v-text="$t('welcome')" />
           </v-list-item-content>
         </v-list-item>
       </v-list>
+
+      <v-list>
+        <v-list-item
+          to="/order"
+          router
+          exact
+        >
+          <v-list-item-action>
+            <v-icon>mdi-format-list-bulleted</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title v-text="$t('orders')" />
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+
+      <v-list>
+        <v-list-item
+          to="/products"
+          router
+          exact
+        >
+          <v-list-item-action>
+            <v-icon>mdi-cart-plus</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title v-text="$t('products')" />
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+
+      <v-list>
+        <v-list-item
+          to="/banner"
+          router
+          exact
+        >
+          <v-list-item-action>
+            <v-icon>mdi-image-area</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title v-text="$t('banners')" />
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+
     </v-navigation-drawer>
+
+    <!-- Header -->
     <v-app-bar :clipped-left="clipped" fixed app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-btn icon @click.stop="miniVariant = !miniVariant">
@@ -35,12 +85,22 @@
       <v-btn icon @click.stop="fixed = !fixed">
         <v-icon>mdi-minus</v-icon>
       </v-btn>
-      <v-toolbar-title v-text="title" />
       <v-spacer />
+
+      <v-col cols="1">
+        <v-select
+          v-model="currentLanguage.name"
+          :items="languages"
+          @change="changeLanguage($event)"
+        ></v-select>
+      </v-col>
+
       <v-btn icon @click.stop="rightDrawer = !rightDrawer">
         <v-icon>mdi-menu</v-icon>
       </v-btn>
     </v-app-bar>
+
+    <!-- main -->
     <v-main>
       <v-container>
         <Nuxt />
@@ -56,6 +116,8 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
+
+    <!-- Footer -->
     <v-footer :absolute="!fixed" app>
       <span>&copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
@@ -67,6 +129,8 @@ export default {
   name: 'DefaultLayout',
   data() {
     return {
+      languages:['RU','TM'],
+      language:'RU',
       clipped: false,
       drawer: false,
       fixed: false,
@@ -97,5 +161,17 @@ export default {
       rightDrawer: false,
     }
   },
+  computed:{
+    currentLanguage() {
+      return this.$i18n.locales.find(
+        (locale) => locale.code === this.$i18n.locale
+      )
+    },
+  },
+  methods:{
+    changeLanguage(language){
+      this.$i18n.setLocale(language);
+    },
+  }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
   <v-row justify="center" align="center">
-    <h1>Welcome</h1>
+    <h1>{{$t('welcome')}}</h1>
   </v-row>
 </template>
 

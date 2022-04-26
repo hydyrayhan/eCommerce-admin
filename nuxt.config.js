@@ -1,5 +1,7 @@
 import colors from 'vuetify/es5/util/colors'
-
+require('dotenv').config({
+  path: './config/config.env',
+})
 export default {
   server: {
     host: process.env.HOST || '0.0.0.0',
@@ -38,11 +40,35 @@ export default {
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
   ],
-
+  moment: {
+    defaultLocale: 'RU',
+    locales: ['RU', 'TM'],
+  },
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    [
+      '@nuxtjs/i18n',
+      {
+        strategy: 'no_prefix',
+        locales: [
+          {
+            code: 'RU', 
+            file: 'ru_RU.js',
+            name: 'RU',
+          },
+          {
+            code: 'TM',
+            file: 'tm_TM.js',
+            name: 'TM',
+          },
+        ],
+        lazy: true,
+        langDir: 'lang/',
+        defaultLocale: 'RU',
+      },
+    ],
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
