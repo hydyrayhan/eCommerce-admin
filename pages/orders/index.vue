@@ -6,6 +6,7 @@
           :label="$t('filter')"
           :items="['Uludan kica', 'Kichiden ula']"
           @change="filter($event)"
+          style="margin-bottom:-20px"
         ></v-select>
         <v-spacer></v-spacer>
         <v-text-field
@@ -21,8 +22,8 @@
         :items="desserts"
         :search="search"
       >
-        <template v-slot:item.actions="{ item }">
-          <v-btn color="info" @click="$redirect(`/orders/${item.order_id}`)">
+        <template v-slot:[`item.actions`]="{ item }">
+          <v-btn color="info" style="margin-right:10px" @click="$redirect(`/orders/${item.order_id}`)">
             {{$t('open')}}
           </v-btn>
           <v-btn color="error" @click="deleteItem(item)">

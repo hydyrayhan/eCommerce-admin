@@ -17,4 +17,7 @@ export default {
   totalProduct:"Umumy haryt sany",
   phoneNumber:"Telefon belgisi",
   status:"Ýagdaýy",
+  updateQuantity:"Sanyny üýtgetmek",
+  save:"Ýatda saklamak",
+  close:"Ýapmak",
 }

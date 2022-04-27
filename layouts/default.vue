@@ -71,6 +71,38 @@
         </v-list-item>
       </v-list>
 
+      <!-- drop downs -->
+      <v-card
+        class="mx-auto"
+        max-width="500"
+      >
+
+        <v-list style="background-color: #363636; box-shadow: 4px 4px #363636;">
+          <v-list-group
+            v-for="item in items"
+            :key="item.title"
+            v-model="item.active"
+            :prepend-icon="item.action"
+            no-action
+          >
+            <template v-slot:activator>
+              <v-list-item-content>
+                <v-list-item-title v-text="item.title"></v-list-item-title>
+              </v-list-item-content>
+            </template>
+
+            <v-list-item
+              v-for="child in item.items"
+              :key="child.title"
+            >
+              <v-list-item-content>
+                <v-list-item-title v-text="child.title"></v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list-group>
+        </v-list>
+      </v-card>
+
     </v-navigation-drawer>
 
     <!-- Header -->
@@ -87,7 +119,7 @@
       </v-btn>
       <v-spacer />
 
-      <v-col cols="1">
+      <v-col cols="1" style="margin-bottom:-10px">
         <v-select
           v-model="currentLanguage.name"
           :items="languages"
@@ -137,24 +169,10 @@ export default {
       fixed: false,
       items: [
         {
-          icon: 'mdi-apps',
-          title: 'Welcome',
-          to: '/',
-        },
-        {
-          icon: 'mdi-format-list-bulleted',
-          title: 'Zakaz',
-          to:'/order',
-        },
-        {
-          icon: 'mdi-cart-plus',
-          title: 'Products',
-          to: '/products',
-        },
-        {
-          icon: 'mdi-image-area',
-          title: 'Banners',
-          to: '/banner',
+          action: 'mdi-ticket',
+          items: [{ title: 'List Item' }],
+          title: 'Group',
+          active: false
         },
       ],
       miniVariant: false,

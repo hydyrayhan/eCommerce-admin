@@ -17,4 +17,7 @@ export default {
   totalProduct:"Общий продукт",
   phoneNumber:"Телефонный номер",
   status:"Статус",
+  updateQuantity:"Обновить количество",
+  save:"Сохранять",
+  close:"Закрывать",
 }
