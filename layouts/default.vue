@@ -28,7 +28,7 @@
 
       <v-list>
         <v-list-item
-          to="/order"
+          to="/orders"
           router
           exact
         >
@@ -125,6 +125,7 @@
 </template>
 
 <script>
+import { mapGetters , mapActions} from 'vuex'
 export default {
   name: 'DefaultLayout',
   data() {
@@ -168,10 +169,15 @@ export default {
       )
     },
   },
+  
   methods:{
     changeLanguage(language){
       this.$i18n.setLocale(language);
+      this.languageFunc(language);
     },
+    ...mapActions({
+      languageFunc : 'language/fetchLanguage'
+    })
   }
 }
 </script>
