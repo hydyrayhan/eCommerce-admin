@@ -20,4 +20,5 @@ export default {
   updateQuantity:"Sanyny üýtgetmek",
   save:"Ýatda saklamak",
   close:"Ýapmak",
+  addProduct:"Haryt goşmak",
 }

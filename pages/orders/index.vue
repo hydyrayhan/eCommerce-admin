@@ -6,7 +6,7 @@
           :label="$t('filter')"
           :items="['Uludan kica', 'Kichiden ula']"
           @change="filter($event)"
-          style="margin-bottom:-20px"
+          single-line
         ></v-select>
         <v-spacer></v-spacer>
         <v-text-field
@@ -14,13 +14,13 @@
           append-icon="mdi-magnify"
           :label="$t('search')"
           single-line
-          hide-details
+          @keydown.enter="searchFunc"
         ></v-text-field>
       </v-card-title>
       <v-data-table
         :headers="headers"
         :items="desserts"
-        :search="search"
+        @pagination="paginationFunc"
       >
         <template v-slot:[`item.actions`]="{ item }">
           <v-btn color="info" style="margin-right:10px" @click="$redirect(`/orders/${item.order_id}`)">
@@ -104,6 +104,12 @@ export default {
           { text: 'Actions', value: 'actions', sortable: false }
         ]
       }
+    },
+    paginationFunc(values){
+      // off set hemde limit shu yerden alaymaly edip goydym
+    },
+    searchFunc(){
+      console.log("men ishledim ahyry"+this.search)
     }
   }
 }

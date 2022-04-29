@@ -12,5 +12,6 @@ export const actions = {
   async fetchData({ dispatch }) {
     await dispatch('orders/fetchOrders')
     await dispatch('language/fetchLanguage')
+    await dispatch('products/fetchProducts')
   },
 }

@@ -20,4 +20,5 @@ export default {
   updateQuantity:"Обновить количество",
   save:"Сохранять",
   close:"Закрывать",
+  addProduct:"Добавить продукт",
 }
