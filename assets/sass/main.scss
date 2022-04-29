@@ -1,0 +1,16 @@
+.perfume__images__wrapper{
+  .perfume__images{
+    display: flex;
+    flex-wrap: wrap;
+    &__item{
+      width: 23%;
+      margin-right: 2.5%;
+      &:nth-child(4n){
+        margin-right: 0;
+      }
+      img{
+        width: 100%;
+      }
+    }
+  }
+}

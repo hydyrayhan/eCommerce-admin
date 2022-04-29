@@ -21,4 +21,10 @@ export default {
   save:"Сохранять",
   close:"Закрывать",
   addProduct:"Добавить продукт",
+  chooseImage:"Выбрать изображение",
+  turkmen:"Туркменский",
+  rus:"Русский",
+  description:"Описание",
+  productCode:"Код продукта",
+  price:"Цена",
 }

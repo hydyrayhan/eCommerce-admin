@@ -1,0 +1,21 @@
+.perfume__images__wrapper .perfume__images {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.perfume__images__wrapper .perfume__images__item {
+  width: 23%;
+  margin-right: 2.5%;
+}
+
+.perfume__images__wrapper .perfume__images__item:nth-child(4n) {
+  margin-right: 0;
+}
+
+.perfume__images__wrapper .perfume__images__item img {
+  width: 100%;
+}
+/*# sourceMappingURL=main.css.map */

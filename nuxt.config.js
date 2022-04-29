@@ -25,11 +25,16 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [],
+  css: [
+    { src: '~/assets/sass/main.scss' },
+  ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    {src:'~/plugins/redirect'}
+    {src:'~/plugins/redirect'},
+    {src:'~/plugins/vue-confirm-dialog', mode: 'client'},
+    // {src:'~/plugins/vue-tinymce-editor', ssr:false}
+    // {src:'~/plugins/own-tiny', ssr:false}
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -98,5 +103,7 @@ export default {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    vendor: ['tinymce', 'tinymce-vue-2'],
+  },
 }

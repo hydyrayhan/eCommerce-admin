@@ -21,4 +21,10 @@ export default {
   save:"Ýatda saklamak",
   close:"Ýapmak",
   addProduct:"Haryt goşmak",
+  chooseImage:"Surat saýlaň",
+  turkmen:"Türkmen",
+  rus:"Rusça",
+  description:"Mazmuny",
+  productCode:"Haryt kody",
+  price:"Bahasy",
 }
