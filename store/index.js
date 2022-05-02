@@ -13,5 +13,6 @@ export const actions = {
     await dispatch('orders/fetchOrders')
     await dispatch('language/fetchLanguage')
     await dispatch('products/fetchProducts')
+    await dispatch('kategory/fetchkategory')
   },
 }

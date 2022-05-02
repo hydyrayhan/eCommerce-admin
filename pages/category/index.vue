@@ -3,7 +3,7 @@
     <v-btn
       color="info"
       class="mb-5"
-      @click="$redirect('/products/add')"
+      @click="$redirect('/category/add')"
     >
     {{$t('add')}} 
     <v-icon>mdi-plus</v-icon>
@@ -11,34 +11,23 @@
 
     <v-card>
       <v-card-title>
-        <v-select
-          :label="$t('filter')"
-          :items="['Uludan kica', 'Kichiden ula']"
-          @change="filter($event)"
-          single-line
-        ></v-select>
-        <v-spacer></v-spacer>
-        <v-text-field
-          v-model="search"
-          append-icon="mdi-magnify"
-          :label="$t('search')"
-          single-line
-          @keydown.enter="searchFunc"
-        ></v-text-field>
+        <v-col cols="6">
+          <v-text-field
+            v-model="search"
+            append-icon="mdi-magnify"
+            :label="$t('search')"
+            single-line
+            @keydown.enter="searchFunc"
+          ></v-text-field>
+        </v-col>
       </v-card-title>
       <v-data-table
         :headers="headers"
-        :items="products"
+        :items="kategories"
         @pagination="paginationFunc"
       >
-        <template v-slot:[`item.product_image`]="{ item }">
-          <img 
-            :src="item.product_image[0]" 
-            :alt="item.name"
-          />
-        </template>
         <template v-slot:[`item.actions`]="{ item }">
-          <v-btn color="info" style="margin-right:10px" @click="$redirect(`/products/edit/${item.product_id}`)">
+          <v-btn color="info" style="margin-right:10px" @click="$redirect(`/category/edit/${item.id}`)">
             {{$t('open')}}
           </v-btn>
           <v-btn color="error" @click="deleteItem(item)">
@@ -66,17 +55,17 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
-  data(){
-    return{
+  data () {
+    return {
       search: '',
       dialogDelete: false,
       headers: [],
     }
   },
   computed:{
-     ...mapGetters({
+    ...mapGetters({
+      kategories: 'kategory/kategory',
       lang: 'language/language',
-      products: 'products/products',
     }),
   },
   watch:{
@@ -101,24 +90,21 @@ export default {
     changeHeader(){
       if(this.lang === 'RU'){
         this.headers = [
-          {text: 'Идентификатор', value: 'product_id'},
-          { text: 'Имя', value: 'name' },
-          { text: 'Изображение', value: 'product_image' },
-          { text: 'Код продукта', value: 'product_code' },
+          {text: 'Идентификатор', value: 'id'},
+          { text: 'Pусское имя', value: 'kategory_name_ru' },
+          { text: 'Туркменское имя', value: 'kategory_name_tm' },
           { text: 'Действия', value: 'actions', sortable: false }
         ]
       }else{
         this.headers = [
-          {text: 'ID', value: 'product_id'},
-          { text: 'Ady', value: 'name' },
-          { text: 'Suraty', value: 'product_image' },
-          { text: 'Haryt kody', value: 'product_code' },
+          {text: 'ID', value: 'id'},
+          { text: 'Rusça ady', value: 'kategory_name_ru' },
+          { text: 'Türkmençe ady', value: 'kategory_name_tm' },
           { text: 'Actions', value: 'actions', sortable: false }
         ]
       }
     },
     paginationFunc(values){
-      console.log(values)
       // off set hemde limit shu yerden alaymaly edip goydym
     },
     searchFunc(){

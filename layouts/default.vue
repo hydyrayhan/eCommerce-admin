@@ -71,6 +71,21 @@
         </v-list-item>
       </v-list>
 
+      <v-list>
+        <v-list-item
+          to="/category"
+          router
+          exact
+        >
+          <v-list-item-action>
+            <v-icon>mdi-grid-large</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title v-text="$t('category')" />
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+
       <!-- drop downs -->
       <v-card
         class="mx-auto"

@@ -20,7 +20,7 @@ export default {
   updateQuantity:"Sanyny üýtgetmek",
   save:"Ýatda saklamak",
   close:"Ýapmak",
-  addProduct:"Haryt goşmak",
+  add:"Goşmak",
   chooseImage:"Surat saýlaň",
   turkmen:"Türkmen",
   rus:"Rusça",
@@ -29,4 +29,5 @@ export default {
   price:"Bahasy",
   stock:"Stock sany",
   discount:"Arzanladyş",
+  category:"Kategorylar",
 }

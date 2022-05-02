@@ -20,7 +20,7 @@ export default {
   updateQuantity:"Обновить количество",
   save:"Сохранять",
   close:"Закрывать",
-  addProduct:"Добавить продукт",
+  add:"Добавить",
   chooseImage:"Выбрать изображение",
   turkmen:"Туркменский",
   rus:"Русский",
@@ -29,4 +29,5 @@ export default {
   price:"Цена",
   stock:"Инвентарный номер",
   discount:"Скидка",
+  category:"Категории",
 }
