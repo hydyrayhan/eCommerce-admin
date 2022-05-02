@@ -160,17 +160,6 @@
 import { mapGetters , mapActions} from 'vuex'
 export default {
   name: 'DefaultLayout',
-  head:{
-    script:[
-      {
-        type: 'text/javascript',
-        src: 'https://cdn.tiny.cloud/1/hpf9h4802a6gu20q61xonxq5tg2r8ot8qw5bmkjuseuw4s9i/tinymce/5/tinymce.min.js',
-      },
-      {
-        src:"/scripts/js/own-tiny.js"
-      }
-    ]
-  },
   data() {
     return {
       languages:['RU','TM'],

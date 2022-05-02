@@ -43,29 +43,153 @@
         <v-text-field dense :label="$t('rus')+' '+$t('name')" :rules="rules"></v-text-field>
       </v-col>
     </v-row>
-    <v-row style="padding:12px 24px">
-      <v-col cols="5">
-        {{$t('turkmen')}} {{$t('description')}}
-        <div class="editorCon">
+
+    <v-col>
+      {{$t('turkmen')}} {{$t('description')}}
+
+      <div
+        class="quill-editor"
+        v-model="perfume.fullDescription.tm"
+        v-quill:fullDescriptionTm="{}"
+      />
+    </v-col>
+    <br>
+    <v-col>
+      {{$t('rus')}} {{$t('description')}}
+
+      <div
+        class="quill-editor"
+        v-model="perfume.fullDescription.ru"
+        v-quill:fullDescriptionRu="{}"
+      />
+    </v-col>
+
+
+    <!-- <v-row style="padding:12px 24px">
+      <v-col cols="5"> -->
+        <!-- {{$t('turkmen')}} {{$t('description')}}
+
+        <div
+          class="quill-editor"
+          v-model="perfume.fullDescription.en"
+          v-quill:fullDescriptionEn="{}"
+        /> -->
+        <!-- <div class="editorCon">
             <textarea id="image-tools"></textarea>
-        </div>
-      </v-col>
-      <v-col cols="1"></v-col>
-      <v-col cols="5">
-        {{$t('rus')}} {{$t('description')}}
-        <div class="editorCon">
+        </div> -->
+        <!-- <editor
+          api-key="no-api-key"
+          :init="{
+          height: 500,
+          cleanup_on_startup: false,
+          trim_span_elements: false,
+          verify_html: false,
+          cleanup: false,
+  
+          valid_elements: '*[*]',
+          height: `480`,
+          relative_urls: false,
+          remove_script_host: true,
+          convert_urls: true,
+          image_advtab: true,
+          plugins: 'print preview code searchreplace autolink directionality visualblocks visualchars image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount  imagetools  contextmenu colorpicker textpattern help',
+          toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
+          file_browser_callback_types: 'file image media',
+          toolbar: `forecolor backcolor toc charmap`,
+          templates: [
+              { title: 'Standart content', content: '<div class=`container`><div class=`row`></div></div>' }
+          ],
+          file_picker_types: 'file image media',
+          file_picker_callback: function (cb, value, meta) {
+            var input = document.createElement('input');
+            input.setAttribute('type', 'file');
+            input.setAttribute('accept', 'image/*');
+  
+  
+            input.onchange = function () {
+              var file = this.files[0];
+  
+              var reader = new FileReader();
+              reader.onload = function () {
+                var id = 'blobid' + (new Date()).getTime();
+                var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
+                var base64 = reader.result.split(',')[1];
+                var blobInfo = blobCache.create(id, file, base64);
+                blobCache.add(blobInfo);
+  
+                cb(blobInfo.blobUri(), { title: file.name });
+              };
+              reader.readAsDataURL(file);
+            };
+  
+            input.click();
+          }
+          }"
+        /> -->
+      <!-- </v-col> -->
+      <!-- <v-col cols="1"></v-col> -->
+      <!-- <v-col cols="5"> -->
+        <!-- {{$t('rus')}} {{$t('description')}} -->
+        <!-- <div class="editorCon">
             <textarea id="image-tools2"></textarea>
-        </div>
-      </v-col>
-    </v-row>
+        </div> -->
+        <!-- <editor
+          api-key="no-api-key"
+          :init="{
+            height: 500,
+            cleanup_on_startup: false,
+            trim_span_elements: false,
+            verify_html: false,
+            cleanup: false,
+    
+            valid_elements: '*[*]',
+            height: `480`,
+            relative_urls: false,
+            remove_script_host: true,
+            convert_urls: true,
+            image_advtab: true,
+            plugins: 'print preview code searchreplace autolink directionality visualblocks visualchars image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount  imagetools  contextmenu colorpicker textpattern help',
+            toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
+            file_browser_callback_types: 'file image media',
+            toolbar: `forecolor backcolor toc charmap`,
+            templates: [
+                { title: 'Standart content', content: '<div class=`container`><div class=`row`></div></div>' }
+            ],
+            file_picker_types: 'file image media',
+            file_picker_callback: function (cb, value, meta) {
+              var input = document.createElement('input');
+              input.setAttribute('type', 'file');
+              input.setAttribute('accept', 'image/*');
+    
+    
+              input.onchange = function () {
+                var file = this.files[0];
+    
+                var reader = new FileReader();
+                reader.onload = function () {
+                  var id = 'blobid' + (new Date()).getTime();
+                  var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
+                  var base64 = reader.result.split(',')[1];
+                  var blobInfo = blobCache.create(id, file, base64);
+                  blobCache.add(blobInfo);
+    
+                  cb(blobInfo.blobUri(), { title: file.name });
+                };
+                reader.readAsDataURL(file);
+              };
+    
+              input.click();
+            }
+          }"
+        /> -->
+      <!-- </v-col>
+    </v-row> -->
     <v-row style="padding:12px 24px">
-      <v-col cols="5"><v-text-field dense :label="$t('productCode')" :rules="rules"></v-text-field></v-col>
+      <v-col cols="3"><v-text-field dense :label="$t('productCode')" :rules="rules"></v-text-field></v-col>
+      <v-col cols="2"><v-text-field dense :label="$t('stock')" :rules="rules" type="number" min="0"></v-text-field></v-col>
       <v-col cols="1"></v-col>
       <v-col cols="2"><v-text-field dense type="number" min="0" :label="$t('price')" :rules="rules"></v-text-field></v-col>
-      <v-radio-group
-        v-model="row"
-        row
-      >
+      <v-radio-group v-model="data.price" row>
         <v-radio
           label="USD"
           value="radio-1"
@@ -76,26 +200,83 @@
           value="radio-2"
           color="white"
         ></v-radio>
-    </v-radio-group>
+      </v-radio-group>
+      <v-col cols="1">
+        <v-text-field dense type="number" :label="$t('discount')"></v-text-field>
+      </v-col>
     </v-row>
-    <!--  kategory, subkategory, banner,stocksan, discount -->
+
+    <v-row style="padding:12px 24px">
+      <v-col>
+        <v-select
+          v-model="banner"
+          :items="['Garaşylýar' , 'Kabul edildi', 'Gowşuryldy']"
+          @change="bannerChange($event)"
+          style="margin-top:-30px;"
+        ></v-select>
+      </v-col>
+      <v-col>
+        <v-select
+          v-model="kategory"
+          :items="['Garaşylýar' , 'Kabul edildi', 'Gowşuryldy']"
+          @change="kategoryChange($event)"
+          style="margin-top:-30px;"
+        ></v-select>
+      </v-col>
+      <v-col>
+        <v-select
+          v-model="subkategory"
+          :items="['Garaşylýar' , 'Kabul edildi', 'Gowşuryldy']"
+          @change="subkategoryChange($event)"
+          style="margin-top:-30px;"
+        ></v-select>
+      </v-col>
+      <v-col></v-col>
+    </v-row>
+
+    <!--  kategory, subkategory, banner -->
   </div>
 </template>
 
 <script>
+// import Editor from '@tinymce/tinymce-vue'
 export default {
+  name: 'appp',
+  components: {
+    //  'editor': Editor
+   },
   data(){
     return {
+      data:{
+        price:0,
+      },
+      kategory:"Kabul edildi",
+      subkategory:"Kabul edildi",
+      banner:"Kabul edilmedi",
+      perfume: {
+        name: '',
+        shortDescription: {
+          en: '',
+          ru: '',
+          tm: '',
+        },
+        fullDescription: {
+          en: '',
+          ru: '',
+          tm: '',
+        },
+        images: [],
+        sizes: [],
+        categories: [],
+        unit: '',
+        price: '',
+        gender: '',
+      },
+      tinyInit:{},
       dialogDelete: false,
       rules:[
         value => !!value || "Zerur",
       ],
-      editorContent: '<h2 style="color: #339966;">Hi there from TinyMCE for Vue.js.</h2> <p>&nbsp;</p> <p><span>Hey y`all.</span></p>',
-      tinyOptions: { 
-        'height': 400 , 
-        codesample_content_css: '../css/prism.css',
-      },
-      myInit:{},
       index:-1,
       product: {
         name: '',
@@ -147,6 +328,15 @@ export default {
       this.dialogDelete = true;
       this.index = index;
     },
+    bannerChange(value){
+      console.log(value);
+    },
+    kategoryChange(value){
+      console.log(value)
+    },
+    subkategoryChange(value){
+      console.log(value);
+    }
   },
 }
 </script>

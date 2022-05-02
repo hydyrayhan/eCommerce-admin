@@ -27,4 +27,6 @@ export default {
   description:"Описание",
   productCode:"Код продукта",
   price:"Цена",
+  stock:"Инвентарный номер",
+  discount:"Скидка",
 }

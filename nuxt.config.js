@@ -34,7 +34,8 @@ export default {
     {src:'~/plugins/redirect'},
     {src:'~/plugins/vue-confirm-dialog', mode: 'client'},
     // {src:'~/plugins/vue-tinymce-editor', ssr:false}
-    // {src:'~/plugins/own-tiny', ssr:false}
+    // {src:'~/plugins/own-tiny', ssr: false},
+    { src: '~/plugins/vue-quill-editor', mode: 'client' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

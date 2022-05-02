@@ -27,4 +27,6 @@ export default {
   description:"Mazmuny",
   productCode:"Haryt kody",
   price:"Bahasy",
+  stock:"Stock sany",
+  discount:"Arzanladyş",
 }
