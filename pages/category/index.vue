@@ -9,46 +9,42 @@
     <v-icon>mdi-plus</v-icon>
     </v-btn>
 
-    <v-card>
-      <v-card-title>
-        <v-col cols="6">
-          <v-text-field
-            v-model="search"
-            append-icon="mdi-magnify"
-            :label="$t('search')"
-            single-line
-            @keydown.enter="searchFunc"
-          ></v-text-field>
-        </v-col>
-      </v-card-title>
-      <v-data-table
-        :headers="headers"
-        :items="kategories"
-        @pagination="paginationFunc"
-      >
-        <template v-slot:[`item.actions`]="{ item }">
-          <v-btn color="info" style="margin-right:10px" @click="$redirect(`/category/edit/${item.id}`)">
-            {{$t('open')}}
+    <v-col cols="6">
+      <v-text-field
+        v-model="search"
+        append-icon="mdi-magnify"
+        :label="$t('search')"
+        single-line
+        @keydown.enter="searchFunc"
+      ></v-text-field>
+    </v-col>
+
+    <div class="tableContainer">
+      <div v-for="(kategory , index) in kategories" :key="index" class="list">
+        <nuxt-link :to="'/subCategory/'+kategory.id">
+          {{kategory.kategory_name_ru}}
+        </nuxt-link>
+        <nuxt-link :to="'/subCategory/'+kategory.id">
+          {{kategory.kategory_name_tm}}
+        </nuxt-link>
+        <div class="btns">
+          <v-btn
+            color="info"
+            class="mb-5"
+            @click="$redirect('/category/edit/'+kategory.id)"
+          >
+            {{$t('edit')}}
           </v-btn>
-          <v-btn color="error" @click="deleteItem(item)">
+          <v-btn
+            color="error"
+            class="mb-5"
+            @click="deleteItem(kategory.id)"
+          >
             {{$t('delete')}}
           </v-btn>
-        </template>
-        <template v-slot:top>
-          <v-dialog v-model="dialogDelete" max-width="500px" light>
-            <v-card>
-              <v-card-title class="text-h5">{{$t('deleteDialog')}}</v-card-title>
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="closeDelete">{{$t('cancel')}}</v-btn>
-                <v-btn color="blue darken-1" text @click="deleteItemConfirm">{{$t('ok')}}</v-btn>
-                <v-spacer></v-spacer>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
-        </template>
-      </v-data-table>
-    </v-card>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -68,44 +64,9 @@ export default {
       lang: 'language/language',
     }),
   },
-  watch:{
-    lang(){
-      this.changeHeader()
-    }
-  },
-  mounted(){
-    this.changeHeader()
-  },
   methods:{
     deleteItem(item){
-      this.dialogDelete = true;
-    },
-    closeDelete(){
-      this.dialogDelete = false;
-    },
-    deleteItemConfirm(){
-      this.dialogDelete = false;
-      console.log("men bolsa confirm functino");
-    },
-    changeHeader(){
-      if(this.lang === 'RU'){
-        this.headers = [
-          {text: 'Идентификатор', value: 'id'},
-          { text: 'Pусское имя', value: 'kategory_name_ru' },
-          { text: 'Туркменское имя', value: 'kategory_name_tm' },
-          { text: 'Действия', value: 'actions', sortable: false }
-        ]
-      }else{
-        this.headers = [
-          {text: 'ID', value: 'id'},
-          { text: 'Rusça ady', value: 'kategory_name_ru' },
-          { text: 'Türkmençe ady', value: 'kategory_name_tm' },
-          { text: 'Actions', value: 'actions', sortable: false }
-        ]
-      }
-    },
-    paginationFunc(values){
-      // off set hemde limit shu yerden alaymaly edip goydym
+      console.log(item);
     },
     searchFunc(){
       console.log("men ishledim ahyry"+this.search)

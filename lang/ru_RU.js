@@ -30,4 +30,5 @@ export default {
   stock:"Инвентарный номер",
   discount:"Скидка",
   category:"Категории",
+  edit:"Редактировать",
 }

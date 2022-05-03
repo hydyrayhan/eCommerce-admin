@@ -30,4 +30,5 @@ export default {
   stock:"Stock sany",
   discount:"Arzanladyş",
   category:"Kategorylar",
+  edit:"Üýtgetmek",
 }
