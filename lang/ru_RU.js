@@ -31,4 +31,9 @@ export default {
   discount:"Скидка",
   category:"Категории",
   edit:"Редактировать",
+  about:"О нас",
+  orderProduct:"Счет",
+  contact:"Контакт",
+  ontabi:"fjdlsjfdl",
+  group:"Grupba",
 }

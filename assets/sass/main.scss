@@ -16,10 +16,16 @@
 }
 
 .tableContainer{
+  padding: 16px;
+  background: #1e1e1e;
   div{
-    background: #666666;
+    &:hover{
+      background: gray;
+      border-radius: 5px;
+    }
     a{
-      color: black;
+      padding: 12px;
+      color: white;
       text-decoration: none;
       display: flex;
       align-items: center;
@@ -33,5 +39,11 @@
     justify-content: center;
     align-items: center;
     flex-direction: row;
+    button{
+      margin-bottom: 0 !important;
+      &:first-child{
+        margin-right: 10px;
+      }
+    }
   }
 }

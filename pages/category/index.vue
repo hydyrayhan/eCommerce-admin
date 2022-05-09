@@ -21,12 +21,16 @@
 
     <div class="tableContainer">
       <div v-for="(kategory , index) in kategories" :key="index" class="list">
-        <nuxt-link :to="'/subCategory/'+kategory.id">
-          {{kategory.kategory_name_ru}}
-        </nuxt-link>
-        <nuxt-link :to="'/subCategory/'+kategory.id">
-          {{kategory.kategory_name_tm}}
-        </nuxt-link>
+        <v-col style="padding:0">
+          <nuxt-link :to="'category/subCategory/'+kategory.id">
+            {{kategory.kategory_name_ru}}
+          </nuxt-link>
+        </v-col>
+        <v-col style="padding:0">
+          <nuxt-link :to="'category/subCategory/'+kategory.id">
+            {{kategory.kategory_name_tm}}
+          </nuxt-link>
+        </v-col>
         <div class="btns">
           <v-btn
             color="info"

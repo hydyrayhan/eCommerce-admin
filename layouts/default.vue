@@ -97,23 +97,63 @@
             v-for="item in items"
             :key="item.title"
             v-model="item.active"
-            :prepend-icon="item.action"
+            prepend-icon="mdi-select-group"
             no-action
           >
             <template v-slot:activator>
               <v-list-item-content>
-                <v-list-item-title v-text="item.title"></v-list-item-title>
+                <v-list-item-title v-text="$t('group')"></v-list-item-title>
               </v-list-item-content>
             </template>
-
+            <!-- 1 -->
             <v-list-item
-              v-for="child in item.items"
-              :key="child.title"
+              to="/"
+              style="padding-left:30px"
             >
+              <v-list-item-action>
+                <v-icon>mdi-card-text-outline</v-icon>
+              </v-list-item-action>
               <v-list-item-content>
-                <v-list-item-title v-text="child.title"></v-list-item-title>
+                <v-list-item-title v-text="$t('about')" />
               </v-list-item-content>
             </v-list-item>
+            <!-- 2 -->
+            <v-list-item
+              to="/"
+              style="padding-left:30px"
+            >
+              <v-list-item-action>
+                <v-icon>mdi-card-text-outline</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title v-text="$t('orderProduct')" />
+              </v-list-item-content>
+            </v-list-item>
+            <!-- 3 -->
+            <v-list-item
+              to="/"
+              style="padding-left:30px"
+            >
+              <v-list-item-action>
+                <v-icon>mdi-card-text-outline</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title v-text="$t('contact')" />
+              </v-list-item-content>
+            </v-list-item>
+            <!-- 4 -->
+            <v-list-item
+              to="/"
+              style="padding-left:30px"
+            >
+              <v-list-item-action>
+                <v-icon>mdi-card-text-outline</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title v-text="$t('ontabi')" />
+              </v-list-item-content>
+            </v-list-item>
+            
           </v-list-group>
         </v-list>
       </v-card>

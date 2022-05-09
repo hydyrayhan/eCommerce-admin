@@ -31,4 +31,9 @@ export default {
   discount:"Arzanladyş",
   category:"Kategorylar",
   edit:"Üýtgetmek",
+  about:"Biz barada",
+  orderProduct:"Toleg eltip",
+  contact:"Habarlaşmak",
+  ontabi:"fjdlsjfdl",
+  group:"Group",
 }
