@@ -104,7 +104,7 @@ export default {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
-    vendor: ['tinymce', 'tinymce-vue-2'],
-  },
+  // build: {
+  //   vendor: ['tinymce', 'tinymce-vue-2'],
+  // },
 }

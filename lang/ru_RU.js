@@ -36,4 +36,5 @@ export default {
   contact:"Контакт",
   ontabi:"fjdlsjfdl",
   group:"Grupba",
+  brand:"Бренд",
 }

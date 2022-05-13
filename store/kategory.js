@@ -10,8 +10,8 @@ export const mutations = {
 
 export const actions = {
   async fetchkategory({ commit }) {
-    const kategory= require('~/assets/data/kategory.json');
-    commit('SET_KATEGORY', kategory);
+    const { data } = await this.$axios.get('/admin/categories')
+    commit('SET_KATEGORY', data);
   },
 }
 

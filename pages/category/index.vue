@@ -6,13 +6,11 @@
       @click="$redirect('/category/add')"
     >
     {{$t('add')}} 
-    <v-icon>mdi-plus</v-icon>
     </v-btn>
 
     <v-col cols="6">
       <v-text-field
         v-model="search"
-        append-icon="mdi-magnify"
         :label="$t('search')"
         single-line
         @keydown.enter="searchFunc"
@@ -22,13 +20,13 @@
     <div class="tableContainer">
       <div v-for="(kategory , index) in kategories" :key="index" class="list">
         <v-col style="padding:0">
-          <nuxt-link :to="'category/subCategory/'+kategory.id">
-            {{kategory.kategory_name_ru}}
+          <nuxt-link :to="'category/subCategory/'+kategory.category_id">
+            {{kategory.name_ru}}
           </nuxt-link>
         </v-col>
         <v-col style="padding:0">
-          <nuxt-link :to="'category/subCategory/'+kategory.id">
-            {{kategory.kategory_name_tm}}
+          <nuxt-link :to="'category/subCategory/'+kategory.category_id">
+            {{kategory.name_tm}}
           </nuxt-link>
         </v-col>
         <div class="btns">
@@ -42,7 +40,7 @@
           <v-btn
             color="error"
             class="mb-5"
-            @click="deleteItem(kategory.id)"
+            @click="deleteItem(kategory.category_id)"
           >
             {{$t('delete')}}
           </v-btn>
@@ -69,8 +67,17 @@ export default {
     }),
   },
   methods:{
-    deleteItem(item){
+    async deleteItem(item){
       console.log(item);
+      try {
+        const res = await this.$axios.delete(`/admin/categories/delete/${item}`)
+        if(res.status == 200){
+          await this.$store.dispatch('kategory/fetchkategory')
+          this.$router.push('/category')
+        }
+      } catch (error) {
+        console.log(error);
+      }
     },
     searchFunc(){
       console.log("men ishledim ahyry"+this.search)

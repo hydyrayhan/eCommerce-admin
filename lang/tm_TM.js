@@ -34,6 +34,7 @@ export default {
   about:"Biz barada",
   orderProduct:"Toleg eltip",
   contact:"Habarlaşmak",
-  ontabi:"fjdlsjfdl",
+  ontabi:"Ulanyş düzgünlei",
   group:"Group",
+  brand:"Brend"
 }

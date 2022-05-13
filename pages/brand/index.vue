@@ -1,5 +1,13 @@
 <template>
   <div>
+    <v-btn
+      color="info"
+      class="mb-5"
+      @click="$redirect('/brand/add')"
+    >
+      {{$t('add')}} 
+    </v-btn>
+
     <v-card>
       <v-card-title>
         <v-select
@@ -18,11 +26,17 @@
       </v-card-title>
       <v-data-table
         :headers="headers"
-        :items="desserts"
+        :items="brands"
         @pagination="paginationFunc"
       >
+        <template v-slot:[`item.product_image`]="{ item }">
+          <img 
+            :src="item.product_image[0]" 
+            :alt="item.name"
+          />
+        </template>
         <template v-slot:[`item.actions`]="{ item }">
-          <v-btn color="info" style="margin-right:10px" @click="$redirect(`/orders/${item.order_id}`)">
+          <v-btn color="info" style="margin-right:10px" @click="$redirect(`/products/edit/${item.product_id}`)">
             {{$t('open')}}
           </v-btn>
           <v-btn color="error" @click="deleteItem(item)">
@@ -50,8 +64,8 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
-  data () {
-    return {
+  data(){
+    return{
       search: '',
       dialogDelete: false,
       headers: [],
@@ -59,8 +73,8 @@ export default {
   },
   computed:{
      ...mapGetters({
-      desserts: 'orders/orders',
       lang: 'language/language',
+      brands: 'brand/brand',
     }),
   },
   watch:{
@@ -74,9 +88,6 @@ export default {
     document.querySelector(".v-data-footer__icons-after button span").innerHTML = '>';
   },
   methods:{
-    filter(value){
-      console.log(value)
-    },
     deleteItem(item){
       this.dialogDelete = true;
     },
@@ -90,23 +101,22 @@ export default {
     changeHeader(){
       if(this.lang === 'RU'){
         this.headers = [
-          {text: 'Идентификатор', value: 'order_id'},
+          {text: 'Идентификатор', value: 'product_id'},
           { text: 'Имя', value: 'name' },
-          { text: 'Статус', value: 'status' },
-          { text: 'Дата/Время', value: 'date' },
+          { text: 'Изображение', value: 'product_image' },
           { text: 'Действия', value: 'actions', sortable: false }
         ]
       }else{
         this.headers = [
-          {text: 'ID', value: 'order_id'},
+          {text: 'ID', value: 'product_id'},
           { text: 'Ady', value: 'name' },
-          { text: 'Ýagdaýy', value: 'status' },
-          { text: 'Senesi/wagty', value: 'date' },
+          { text: 'Suraty', value: 'product_image' },
           { text: 'Actions', value: 'actions', sortable: false }
         ]
       }
     },
     paginationFunc(values){
+      console.log(values)
       // off set hemde limit shu yerden alaymaly edip goydym
     },
     searchFunc(){
@@ -117,4 +127,5 @@ export default {
 </script>
 
 <style>
+
 </style>

@@ -6,7 +6,6 @@
       @click="$redirect('/products/add')"
     >
     {{$t('add')}} 
-    <v-icon>mdi-plus</v-icon>
     </v-btn>
 
     <v-card>
@@ -20,7 +19,6 @@
         <v-spacer></v-spacer>
         <v-text-field
           v-model="search"
-          append-icon="mdi-magnify"
           :label="$t('search')"
           single-line
           @keydown.enter="searchFunc"
@@ -86,6 +84,8 @@ export default {
   },
   mounted(){
     this.changeHeader()
+    document.querySelector(".v-data-footer__icons-before button span").innerHTML = '<';
+    document.querySelector(".v-data-footer__icons-after button span").innerHTML = '>';
   },
   methods:{
     deleteItem(item){

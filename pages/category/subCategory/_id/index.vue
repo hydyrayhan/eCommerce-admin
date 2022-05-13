@@ -6,13 +6,11 @@
       @click="$redirect(`/category/subCategory/${id}/add`)"
     >
     {{$t('add')}} 
-    <v-icon>mdi-plus</v-icon>
     </v-btn>
 
     <v-col cols="6">
       <v-text-field
         v-model="search"
-        append-icon="mdi-magnify"
         :label="$t('search')"
         single-line
         @keydown.enter="searchFunc"
@@ -20,25 +18,25 @@
     </v-col>
 
     <div class="tableContainer">
-      <div v-for="(kategory , index) in kategories" :key="index" class="list">
+      <div v-for="(subCategory , index) in subCategories" :key="index" class="list">
         <v-col>
-          {{kategory.kategory_name_ru}}
+          {{subCategory.name_ru}}
         </v-col>
         <v-col>
-          {{kategory.kategory_name_tm}}
+          {{subCategory.name_tm}}
         </v-col>
         <div class="btns">
           <v-btn
             color="info"
             class="mb-5"
-            @click="$redirect(`/category/subCategory/${kategory.id}/edit`)"
+            @click="$redirect(`/category/subCategory/${subCategory.subcategory_id}/edit?categoryId=${id}`)"
           >
             {{$t('edit')}}
           </v-btn>
           <v-btn
             color="error"
             class="mb-5"
-            @click="deleteItem(kategory.id)"
+            @click="deleteItem(subCategory.subcategory_id)"
           >
             {{$t('delete')}}
           </v-btn>
@@ -51,14 +49,13 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
-  props: [
-    'id'
-  ],
   data () {
     return {
       search: '',
       dialogDelete: false,
       headers: [],
+      id:0,
+      subCategories:[],
     }
   },
   computed:{
@@ -67,9 +64,26 @@ export default {
       lang: 'language/language',
     }),
   },
+  mounted(){
+    this.id = this.$route.params.id
+    const id = this.id
+    const category = this.kategories.find(function(e){
+      return e.category_id === id
+    });
+    this.subCategories = category.subcategories;
+    console.log(this.subCategories)
+  },
   methods:{
-    deleteItem(item){
-      console.log(item);
+    async deleteItem(item){
+      try {
+        const res = await this.$axios.delete(`/admin/subcategories/delete/${item}`);
+        if(res.status == 200){
+          await this.$store.dispatch('kategory/fetchkategory');
+          document.location.reload();
+        }
+      } catch (error) {
+        console.log(error);
+      }
     },
     searchFunc(){
       console.log("men ishledim ahyry"+this.search)

@@ -7,25 +7,43 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   data: () => ({
     data:{
-      name_tm:'lfjdsljfdf',
-      name_ru:'fdsfdsfd',
+      name_tm:'',
+      name_ru:'',
     },
+    id:0,
     rules: [
       value => !!value || 'Required.',
-      value => (value || '').length <= 20 || 'Max 20 characters',
-      value => {
-        const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        return pattern.test(value) || 'Invalid e-mail.'
-      },
     ],
   }),
+  computed:{
+    ...mapGetters({
+      kategories: 'kategory/kategory',
+    }),
+  },
+  mounted(){
+    const id = this.$route.params.id;
+    const category = this.kategories.find(function(e){
+      return e.id === Number(id)
+    });
+    this.data.name_tm = category.name_tm
+    this.data.name_ru = category.name_ru
+    this.id = category.category_id
+  },
   methods:{
-    sendCategory(){
-      console.log(this.data.name_tm)
-      console.log(this.data.name_ru)
+    async sendCategory(){
+      try {
+        const res = await this.$axios.patch(`/admin/categories/edit/${this.id}`, this.data)
+        if(res.status == 200){
+          this.$router.push('/category')
+          await this.$store.dispatch('kategory/fetchkategory')
+        }
+      } catch (error) {
+        console.log(error);
+      }
     }
   }
 }

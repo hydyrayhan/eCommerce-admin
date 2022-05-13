@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="productAdd">
       <v-col cols="5">
         {{$t('chooseImage')}}
         <v-file-input
@@ -189,7 +189,18 @@
       <v-col cols="2"><v-text-field dense :label="$t('stock')" :rules="rules" type="number" min="0"></v-text-field></v-col>
       <v-col cols="1"></v-col>
       <v-col cols="2"><v-text-field dense type="number" min="0" :label="$t('price')" :rules="rules"></v-text-field></v-col>
-      <v-radio-group v-model="data.price" row>
+      <v-col cols="3" style="margin-top:10px">
+        <label>
+          <input type="radio" name="unit" value="TMT">
+          <span>TMT</span>
+        </label>
+        <!-- <v-spacer></v-spacer> -->
+        <label>
+          <input type="radio" name="unit" value="USD">
+          <span>USD</span>
+        </label>
+      </v-col>
+      <!-- <v-radio-group v-model="data.price" row>
         <v-radio
           label="USD"
           value="radio-1"
@@ -200,7 +211,7 @@
           value="radio-2"
           color="white"
         ></v-radio>
-      </v-radio-group>
+      </v-radio-group> -->
       <v-col cols="1">
         <v-text-field dense type="number" :label="$t('discount')"></v-text-field>
       </v-col>
@@ -299,6 +310,9 @@ export default {
       },
       productImageSources: [],
     }
+  },
+  mounted(){
+    document.querySelector(".productAdd .v-input__icon button").innerHTML='<svg height="20" width="20"><path d="M10 13.271 5.708 8.979 6.958 7.729 9.125 9.896V3.333H10.875V9.896L13.042 7.729L14.292 8.979ZM5.083 16.667Q4.354 16.667 3.844 16.156Q3.333 15.646 3.333 14.917V12.5H5.083V14.917Q5.083 14.917 5.083 14.917Q5.083 14.917 5.083 14.917H14.917Q14.917 14.917 14.917 14.917Q14.917 14.917 14.917 14.917V12.5H16.667V14.917Q16.667 15.646 16.156 16.156Q15.646 16.667 14.917 16.667Z" fill="#FFFFFF"/></svg>'
   },
   methods:{
     deleteItem(item){
