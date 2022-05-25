@@ -125,7 +125,7 @@
             </template>
             <!-- 1 -->
             <v-list-item
-              to="/"
+              to="/statik/about"
               style="padding-left:30px"
             >
               <v-list-item-action>
@@ -136,7 +136,7 @@
             </v-list-item>
             <!-- 2 -->
             <v-list-item
-              to="/"
+              to="/statik/orderProduct"
               style="padding-left:30px"
             >
               <v-list-item-action>
@@ -147,7 +147,7 @@
             </v-list-item>
             <!-- 3 -->
             <v-list-item
-              to="/"
+              to="/statik/contact"
               style="padding-left:30px"
             >
               <v-list-item-action>
@@ -158,7 +158,7 @@
             </v-list-item>
             <!-- 4 -->
             <v-list-item
-              to="/"
+              to="/statik/usage"
               style="padding-left:30px"
             >
               <v-list-item-action>

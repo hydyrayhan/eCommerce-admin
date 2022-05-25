@@ -36,5 +36,6 @@ export default {
   contact:"Habarlaşmak",
   ontabi:"Ulanyş düzgünlei",
   group:"Group",
-  brand:"Brend"
+  brand:"Brend",
+  link:"Link"
 }
