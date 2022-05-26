@@ -8,14 +8,14 @@
     {{$t('add')}} 
     </v-btn>
 
-    <v-col cols="6">
+    <!-- <v-col cols="6">
       <v-text-field
         v-model="search"
         :label="$t('search')"
         single-line
         @keydown.enter="searchFunc"
       ></v-text-field>
-    </v-col>
+    </v-col> -->
 
     <div class="tableContainer">
       <div v-for="(subCategory , index) in subCategories" :key="index" class="list">

@@ -69,12 +69,14 @@ export default {
       search: '',
       dialogDelete: false,
       headers: [],
+      paginationPage:1,
     }
   },
   computed:{
      ...mapGetters({
       lang: 'language/language',
       brands: 'brand/brand',
+      count: 'brand/brandCount',
     }),
   },
   watch:{
@@ -86,6 +88,11 @@ export default {
     this.changeHeader()
     document.querySelector(".v-data-footer__icons-before button span").innerHTML = '<';
     document.querySelector(".v-data-footer__icons-after button span").innerHTML = '>';
+
+    const after = document.querySelector(".v-data-footer__icons-after")
+    after.addEventListener("click",function(){
+      console.log("After is work")
+    })
   },
   methods:{
     deleteItem(item){
@@ -101,22 +108,27 @@ export default {
     changeHeader(){
       if(this.lang === 'RU'){
         this.headers = [
-          {text: 'Идентификатор', value: 'product_id'},
+          {text: 'Идентификатор', value: 'brand_id'},
           { text: 'Имя', value: 'name' },
-          { text: 'Изображение', value: 'product_image' },
+          { text: 'Изображение', value: 'image' },
           { text: 'Действия', value: 'actions', sortable: false }
         ]
       }else{
         this.headers = [
-          {text: 'ID', value: 'product_id'},
+          {text: 'ID', value: 'brand_id'},
           { text: 'Ady', value: 'name' },
-          { text: 'Suraty', value: 'product_image' },
+          { text: 'Suraty', value: 'image' },
           { text: 'Actions', value: 'actions', sortable: false }
         ]
       }
     },
     paginationFunc(values){
+      values.itemsLength = this.count;
       console.log(values)
+      console.log(this.paginationPage)
+      if(values.page > this.paginationPage){
+
+      }
       // off set hemde limit shu yerden alaymaly edip goydym
     },
     searchFunc(){
@@ -127,5 +139,8 @@ export default {
 </script>
 
 <style>
+  .v-data-footer__select{
+    opacity: 0;
+  }
 
 </style>

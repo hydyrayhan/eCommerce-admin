@@ -40,8 +40,9 @@
           <v-btn
             color="error"
             class="mb-5"
-            @click="deleteItem(kategory.category_id)"
+            @click="hi()"
           >
+            <!-- @click="deleteItem(kategory.category_id)" -->
             {{$t('delete')}}
           </v-btn>
         </div>
@@ -67,6 +68,9 @@ export default {
     }),
   },
   methods:{
+    async hi(){
+      await this.$store.dispatch('kategory/fetchkategory','hi')
+    },
     async deleteItem(item){
       console.log(item);
       try {
@@ -79,8 +83,14 @@ export default {
         console.log(error);
       }
     },
-    searchFunc(){
+    async searchFunc(){
       console.log("men ishledim ahyry"+this.search)
+      try {
+        const res = await this.$axios.get(`/admin/categories/search?keyword=${this.search}`)
+        // this.kategories = res.data;
+      } catch (error) {
+        console.log(error);
+      }
     }
   }
 }

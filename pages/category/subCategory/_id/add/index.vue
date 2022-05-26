@@ -20,6 +20,7 @@ export default {
   }),
   methods:{
     async sendCategory(){
+      console.log(this.$route.params.id)
       this.data.category_id = this.$route.params.id;
       console.log(this.data);
       try {
