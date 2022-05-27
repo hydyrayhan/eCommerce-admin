@@ -12,11 +12,8 @@ export const mutations = {
 
 export const actions = {
   async fetchbrand({ commit },obj) {
-    // console.log(obj.limit,obj.offset);
     // const data= require('~/assets/data/product.json');
-    // console.log(data)
-    const { data } = await this.$axios.get(`/admin/brands?limit=${obj.limit}&offset=${obj.offset}`);
-    console.log(data);
+    const { data } = await this.$axios.get(`/admin/brands?limit=${obj.limit}&offset=${obj.offset}&name=${obj.name}&bool=${obj.bool}&keyword=${obj.keyword}`);
     commit('SET_BRAND', data);
   },
 }

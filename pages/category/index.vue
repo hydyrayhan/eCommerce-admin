@@ -72,7 +72,6 @@ export default {
       await this.$store.dispatch('kategory/fetchkategory','hi')
     },
     async deleteItem(item){
-      console.log(item);
       try {
         const res = await this.$axios.delete(`/admin/categories/delete/${item}`)
         if(res.status == 200){
@@ -86,7 +85,7 @@ export default {
     async searchFunc(){
       console.log("men ishledim ahyry"+this.search)
       try {
-        const res = await this.$axios.get(`/admin/categories/search?keyword=${this.search}`)
+        // const res = await this.$axios.get(`/admin/categories/search?keyword=${this.search}`)
         // this.kategories = res.data;
       } catch (error) {
         console.log(error);

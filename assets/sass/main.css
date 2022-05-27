@@ -19,6 +19,11 @@
   width: 100%;
 }
 
+.banner .perfume__images__item {
+  width: 100%;
+  margin-right: 0;
+}
+
 .tableContainer {
   padding: 16px;
   background: #1e1e1e;
@@ -72,14 +77,41 @@
 }
 
 .text-start:last-child {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
+}
+
+tr {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+tr td, tr th {
+  width: 100%;
+}
+
+.text-start {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.text-start img {
+  width: 200px;
+  height: 100px;
 }
 /*# sourceMappingURL=main.css.map */

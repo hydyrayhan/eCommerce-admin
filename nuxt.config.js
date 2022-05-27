@@ -103,6 +103,10 @@ export default {
     },
   },
 
+  publicRuntimeConfig:{
+    url:process.env.SERVER_URL || 'http://localhost:4000'
+  } 
+
   // Build Configuration: https://go.nuxtjs.dev/config-build
   // build: {
   //   vendor: ['tinymce', 'tinymce-vue-2'],

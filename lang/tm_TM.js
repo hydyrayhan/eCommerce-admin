@@ -37,5 +37,6 @@ export default {
   ontabi:"Ulanyş düzgünlei",
   group:"Group",
   brand:"Brend",
-  link:"Link"
+  link:"Link",
+  chooseCategory:"Kategory saýlaň"
 }

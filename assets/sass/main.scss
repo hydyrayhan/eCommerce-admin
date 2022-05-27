@@ -58,7 +58,23 @@
 }
 
 .text-start:last-child{
-  display: flex;
+  // display: flex;
   align-items: center;
   justify-content: flex-end;
+}
+tr{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  td,th{
+    width: 100%;
+  }
+}
+.text-start{
+  display: flex;
+  align-items: center;
+  img{
+    width: 200px;
+    height: 100px;
+  }
 }

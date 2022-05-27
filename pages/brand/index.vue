@@ -10,13 +10,6 @@
 
     <v-card>
       <v-card-title>
-        <v-select
-          :label="$t('filter')"
-          :items="['Uludan kica', 'Kichiden ula']"
-          @change="filter($event)"
-          single-line
-        ></v-select>
-        <v-spacer></v-spacer>
         <v-text-field
           v-model="search"
           :label="$t('search')"
@@ -27,16 +20,21 @@
       <v-data-table
         :headers="headers"
         :items="brands"
-        @pagination="paginationFunc"
+        :server-items-length="count"
+        :options.sync="options"
       >
-        <template v-slot:[`item.product_image`]="{ item }">
+        <template v-slot:[`item.id`]="{ item }">
+          {{ Number((page-1))*10+Number(brands.indexOf(item)+1)}}
+        </template>
+
+        <template v-slot:[`item.image`]="{ item }">
           <img 
-            :src="item.product_image[0]" 
+            :src="$config.url+'/'+item.image" 
             :alt="item.name"
           />
         </template>
         <template v-slot:[`item.actions`]="{ item }">
-          <v-btn color="info" style="margin-right:10px" @click="$redirect(`/products/edit/${item.product_id}`)">
+          <v-btn color="info" style="margin-right:10px" @click="$redirect(`/brand/edit/${item.brand_id}`)">
             {{$t('open')}}
           </v-btn>
           <v-btn color="error" @click="deleteItem(item)">
@@ -66,10 +64,13 @@ import { mapGetters } from 'vuex'
 export default {
   data(){
     return{
+      page:0,
       search: '',
       dialogDelete: false,
       headers: [],
       paginationPage:1,
+      options:{},
+      deleteItemValue:{}
     }
   },
   computed:{
@@ -77,62 +78,70 @@ export default {
       lang: 'language/language',
       brands: 'brand/brand',
       count: 'brand/brandCount',
+      brandsearch: 'brand/brandsearch',
     }),
   },
   watch:{
     lang(){
       this.changeHeader()
+    },
+    options: {
+      handler() {
+        this.getDessertsFromApi();
+      },
+      deep: true
     }
   },
   mounted(){
     this.changeHeader()
     document.querySelector(".v-data-footer__icons-before button span").innerHTML = '<';
     document.querySelector(".v-data-footer__icons-after button span").innerHTML = '>';
-
-    const after = document.querySelector(".v-data-footer__icons-after")
-    after.addEventListener("click",function(){
-      console.log("After is work")
-    })
   },
   methods:{
+    async getDessertsFromApi(searchValue) {
+      this.loading = true;
+      const { sortBy, sortDesc, page, itemsPerPage } = this.options;
+      this.page = page;
+      console.log(searchValue);
+      await this.$store.dispatch(`brand/fetchbrand` , {limit:itemsPerPage,offset:(page-1)*10,name:sortBy[0],bool:sortDesc[0],keyword:searchValue});
+    },
     deleteItem(item){
       this.dialogDelete = true;
+      this.deleteItemValue = item;
     },
     closeDelete(){
       this.dialogDelete = false;
     },
-    deleteItemConfirm(){
+    async deleteItemConfirm(){
       this.dialogDelete = false;
-      console.log("men bolsa confirm functino");
+      try {
+        const res = await this.$axios.delete(`/admin/brands/${this.deleteItemValue.brand_id}`)
+        if(res.status == 200){
+          this.getDessertsFromApi();
+        }
+      } catch (error) {
+        console.log(error);
+      }
     },
     changeHeader(){
       if(this.lang === 'RU'){
         this.headers = [
-          {text: 'Идентификатор', value: 'brand_id'},
+          { text: 'Идентификатор', value: 'id'  },
           { text: 'Имя', value: 'name' },
           { text: 'Изображение', value: 'image' },
           { text: 'Действия', value: 'actions', sortable: false }
         ]
       }else{
         this.headers = [
-          {text: 'ID', value: 'brand_id'},
+          { text: 'ID', value: 'id' },
           { text: 'Ady', value: 'name' },
           { text: 'Suraty', value: 'image' },
           { text: 'Actions', value: 'actions', sortable: false }
         ]
       }
     },
-    paginationFunc(values){
-      values.itemsLength = this.count;
-      console.log(values)
-      console.log(this.paginationPage)
-      if(values.page > this.paginationPage){
-
-      }
-      // off set hemde limit shu yerden alaymaly edip goydym
-    },
     searchFunc(){
-      console.log("men ishledim ahyry"+this.search)
+      this.getDessertsFromApi(this.search)
     }
   }
 }
@@ -142,5 +151,12 @@ export default {
   .v-data-footer__select{
     opacity: 0;
   }
-
+  td{
+    min-height: 100px;
+    padding-bottom: 2px !important;
+  }
+  td>img{
+    padding-bottom: 5px;
+    object-fit: cover;
+  }
 </style>
