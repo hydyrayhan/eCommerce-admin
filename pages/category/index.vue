@@ -83,13 +83,7 @@ export default {
       }
     },
     async searchFunc(){
-      console.log("men ishledim ahyry"+this.search)
-      try {
-        // const res = await this.$axios.get(`/admin/categories/search?keyword=${this.search}`)
-        // this.kategories = res.data;
-      } catch (error) {
-        console.log(error);
-      }
+      await this.$store.dispatch('kategory/fetchkategory',this.search)
     }
   }
 }

@@ -12,7 +12,7 @@ export const actions = {
   async fetchData({ dispatch }) {
     await dispatch('orders/fetchOrders')
     await dispatch('language/fetchLanguage')
-    await dispatch('products/fetchProducts')
+    await dispatch('products/fetchProducts',{limit:10,offset:0})
     await dispatch('kategory/fetchkategory')
     await dispatch('brand/fetchbrand',{limit:10,offset:0})
   },

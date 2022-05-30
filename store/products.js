@@ -1,18 +1,22 @@
 export const state = () => ({
   products: [],
+  count:0
 })
 
 export const mutations = {
   SET_PRODUCTS(state, products) {
-    state.products = products
+    state.products = products.products
+    state.count = products.count
   },
 }
 
 export const actions = {
-  async fetchProducts({ commit }) {
-    // const { data } = await this.$axios.get('/perfumes')
-    const products= require('~/assets/data/product.json');
-    commit('SET_PRODUCTS', products);
+  async fetchProducts({ commit },obj) {
+    
+    // const products= require('~/assets/data/product.json');
+    const { data } = await this.$axios.get(`/admin/products?offset=${0}&limit=${10}&keyword=${obj.keyword}&isActive=${obj.isActive}`)
+    console.log(data);
+    commit('SET_PRODUCTS', data);
   },
 }
 
@@ -20,4 +24,7 @@ export const getters = {
   products(state) {
     return state.products
   },
+  productsCount(state){
+    return state.count
+  }
 }

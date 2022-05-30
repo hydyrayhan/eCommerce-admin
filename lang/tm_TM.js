@@ -38,5 +38,6 @@ export default {
   group:"Group",
   brand:"Brend",
   link:"Link",
-  chooseCategory:"Kategory saýlaň"
+  chooseCategory:"Kategory saýlaň",
+  subCategory:"Sub Kategory"
 }

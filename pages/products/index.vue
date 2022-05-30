@@ -129,5 +129,15 @@ export default {
 </script>
 
 <style>
-
+  .v-data-footer__select{
+    opacity: 0;
+  }
+  td{
+    min-height: 100px;
+    padding-bottom: 2px !important;
+  }
+  td>img{
+    padding-bottom: 5px;
+    object-fit: cover;
+  }
 </style>
