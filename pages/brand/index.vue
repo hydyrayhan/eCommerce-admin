@@ -102,7 +102,6 @@ export default {
       this.loading = true;
       const { sortBy, sortDesc, page, itemsPerPage } = this.options;
       this.page = page;
-      console.log(searchValue);
       await this.$store.dispatch(`brand/fetchbrand` , {limit:itemsPerPage,offset:(page-1)*10,name:sortBy[0],bool:sortDesc[0],keyword:searchValue});
     },
     deleteItem(item){

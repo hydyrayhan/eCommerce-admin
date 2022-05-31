@@ -37,4 +37,12 @@ export default {
   ontabi:"fjdlsjfdl",
   group:"Grupba",
   brand:"Бренд",
+  link:"Link",
+  chooseCategory:"Kategory saýlaň",
+  subCategory:"Sub Kategory",
+  isAction:"Aksiýa harydymy?",
+  isGift:"Sowgatlyk harydymy?",
+  active:"Aktiwe harytlar",
+  notActive:"Aktiwe däl harytlar",
+  seeAll:"Hemmesini görmek",
 }

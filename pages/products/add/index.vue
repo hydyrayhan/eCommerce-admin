@@ -246,26 +246,23 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="2">
+      <v-col cols="3">
         <v-checkbox
-          
-          :label="$t('save')"
-          value="check box 1"
+          v-model="product.isAction"
+          :label="$t('isAction')"
         >
         </v-checkbox>
       </v-col>
-      <v-col cols="2">
+      <v-col cols="3">
         <v-checkbox
-          :label="$t('save')"
-          value="check box 2"
+          v-model="product.isGift"
+          :label="$t('isGift')"
         >
         </v-checkbox>
       </v-col>
     </v-row>
 
     <v-btn color="info" @click="sendProduct">{{$t('save')}}</v-btn>
-
-    <!--  kategory, subkategory, banner -->
   </div>
 </template>
 
@@ -306,7 +303,7 @@ export default {
         brand_id:'',
         product_code:'',
         stock:'',
-        discount:''
+        discount:0
       },
       images:[],
       productImageSources: [],
@@ -398,22 +395,38 @@ export default {
         }
       }
     },
-    sendProduct(){
+    async sendProduct(){
       const valid = false;
       if(this.data.priceUnit === 'USD'){
-        this.product.price_usd = this.data.price+' '+this.data.priceUnit;
+        this.product.price_usd = Number(this.data.price)
       }else if(this.data.priceUnit === 'TMT'){
-        this.product.price_tm = this.data.price+' '+this.data.priceUnit;
+        this.product.price_tm = Number(this.data.price)
       }
 
-      console.log(this.product.body_tm)
-      if(this.images.length>0 && this.product.name_tm && this.product.name_ru && this.product.product_code && this.product.stock && this.data.price && this.data.priceUnit && this.product.discount && this.product.brand_id && this.product.category_id){ //body bosh bolup barsa mesele bolarmy soramaly
-        console.log('valid')
+      if(this.images.length>0 && this.product.name_tm && this.product.name_ru && this.product.product_code && this.product.stock && this.data.price && this.data.priceUnit && this.product.brand_id && this.product.category_id){ //body bosh bolup barsa mesele bolarmy soramaly
+        try {
+          const res = await this.$axios.post('/admin/products/add', this.product)
+          if(res.status == 201){
+            const ress = await this.$axios.post(`/admin/products/upload-image/${res.data.product_id}`,this.returnFormData())
+            if(ress.status == 201){
+              this.$router.push("/products")
+              // console.log("yes")
+            }
+          }
+        } catch (error) {
+          console.log(error);
+        }
       }else{
-        console.log('Boshluklary dolduryn')
+        alert('Boshluklary dolduryn')
       }
 
-      console.log(this.product);
+    },
+    returnFormData(){
+      const formData = new FormData();
+      for(let i = 0; i<this.images.length; i++){
+        formData.append('image', this.images[i])
+      }
+      return formData;
     }
   },
 }
