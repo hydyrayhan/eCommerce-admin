@@ -225,6 +225,7 @@
           :items="brands"
           @change="brandChange($event)"
           style="margin-top:-30px;"
+          v-model="oldbrand"
         ></v-select>
       </v-col>
       <v-col cols="3">
@@ -233,6 +234,7 @@
           :items="kategories.name"
           @change="kategoryChange($event)"
           style="margin-top:-30px;"
+          v-model="oldcategory"
         ></v-select>
       </v-col>
       <v-col cols="3">
@@ -242,6 +244,7 @@
           :items="takeSubNames()"
           @change="subkategoryChange($event)"
           style="margin-top:-30px;"
+          v-model="oldsubcategory"
         ></v-select>
       </v-col>
     </v-row>
@@ -281,6 +284,9 @@ export default {
         priceUnit:'',
         subCategories:[],
       },
+      oldcategory:'',
+      oldsubcategory:'',
+      oldbrand:'',
       brands:[],
       fullBrands:[],
       tinyInit:{},
@@ -305,7 +311,9 @@ export default {
         stock:'',
         discount:''
       },
+      product_id:'',
       images:[],
+      oldImageCount:0,
       productImageSources: [],
       openSub:false,
     }
@@ -320,27 +328,49 @@ export default {
     } catch (error) {
       console.log(error);
     }
-    console.log(res.data);
     for(let i = 0; i<res.data.images.length; i++){
       this.productImageSources.push({
         type: 'objectURL',
-        url: `${this.$config.url}/${res.data.images[i].image}`
+        url: `${this.$config.url}/${res.data.images[i].image}`,
+        id:res.data.images[i].image_id
       });
     }
+    console.log(res.data);
+    this.oldImageCount = res.data.images.length
     this.product.name_tm = res.data.name_tm;
     this.product.name_ru = res.data.name_ru;
     this.product.body_tm = res.data.body_tm;
     this.product.body_ru = res.data.body_ru;
     this.product.product_code = res.data.product_code;
     this.product.stock = res.data.product_stock.quantity;
-    if(res.data.price_tm){
-      this.data.price = res.data.price_tm;
-      this.data.priceUnit = 'TMT'
-    }else if(res.data.price_usd){
-      this.data.priceUnit = 'USD'
-      this.data.price = res.data.price_usd
+    if(res.data.discount){
+      this.data.price = res.data.price_tm_old || res.data.price_usd_old
+      if(res.data.price_tm_old){
+        this.data.priceUnit = 'TMT'
+      }else{
+        this.data.priceUnit = 'USD'
+      }
+    }else{
+      if(res.data.price_tm){
+        this.data.price = res.data.price_tm;
+        this.data.priceUnit = 'TMT'
+      }else if(res.data.price_usd){
+        this.data.priceUnit = 'USD'
+        this.data.price = res.data.price_usd
+      }
     }
-    this.product.discount = res.data.discount
+    this.product_id = res.data.product_id
+    this.product.discount = res.data.discount;
+    this.oldbrand = res.data.brand.name;
+    this.brandChange(res.data.brand.name)
+    this.oldcategory = res.data.category.name_tm;
+    this.kategoryChange(res.data.category.name_tm)
+    if(res.data.subcategory){
+      this.oldsubcategory = res.data.subcategory.name_tm
+      this.subkategoryChange(res.data.subcategory.name_tm)
+    }
+    this.product.isGift = res.data.isGift;
+    this.product.isAction = res.data.isAction;
   },
   computed:{
     ...mapGetters({
@@ -373,10 +403,14 @@ export default {
     closeDelete(){
       this.dialogDelete = false;
     },
-    deleteItemConfirm(){
+    async deleteItemConfirm(){
       this.dialogDelete = false;
-      this.productImageSources.splice(this.index, 1)
-      this.images.splice(this.index, 1)
+      const deleteImage = this.productImageSources.splice(this.index, 1)
+      if(this.oldImageCount < this.index+1){
+        this.images.splice((this.index-this.oldImageCount), 1)
+      }else{
+        await this.$axios.delete(`/admin/products/image/${deleteImage[0].id}`)
+      }
     },
     uploadProductImages(images) {
       if (images.length) {
@@ -424,24 +458,30 @@ export default {
       }
     },
     async sendProduct(){
+      this.data.price_tm=''
+      this.data.price_usd=''
+      console.log(this.product)
       if(this.data.priceUnit === 'USD'){
-        this.product.price_usd = this.data.price+' '+this.data.priceUnit;
+        this.product.price_usd = Number(this.data.price)
       }else if(this.data.priceUnit === 'TMT'){
-        this.product.price_tm = this.data.price+' '+this.data.priceUnit;
+        this.product.price_tm = Number(this.data.price)
       }
-
-      if(this.images.length>0 && this.product.name_tm && this.product.name_ru && this.product.product_code && this.product.stock && this.data.price && this.data.priceUnit && this.product.discount && this.product.brand_id && this.product.category_id){ //body bosh bolup barsa mesele bolarmy soramaly
+      if(this.productImageSources.length>0 && this.product.name_tm && this.product.name_ru && this.product.product_code && this.product.stock && this.data.price && this.data.priceUnit && (this.product.discount==0 || this.product.discount>0) && this.product.brand_id && this.product.category_id){ //body bosh bolup barsa mesele bolarmy soramaly
         try {
-          const res = await this.$axios.post('/admin/products/add', this.product)
-          if(res.status == 201){
-            const ress = await this.$axios.post(`/admin/products/upload-image/${res.data.product_id}`,this.returnFormData())
-            console.log(ress,74983279)
-            if(ress.status == 201){
-              this.$route.push('/')
+          const res = await this.$axios.patch(`/admin/products/${this.product_id}`, this.product);
+          if(res.status == 200){
+            console.log(this.images);
+            if(this.images.length>0){
+              const ress = await this.$axios.post(`/admin/products/upload-image/${res.data.product_id}`,this.returnFormData())
+              if(ress.status == 201){
+                this.$router.push('/products')
+              }
+            }else{
+              this.$router.push('/products')
             }
-            console.log(ress);
-            // this.$router.push('/category')
-            // await this.$store.dispatch('kategory/fetchkategory')
+          }
+          else{
+
           }
         } catch (error) {
           console.log(error);

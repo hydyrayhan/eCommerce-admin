@@ -82,6 +82,24 @@ export default {
       },
     }
   },
+  async mounted(){
+    let res;
+    try {
+      res = await this.$axios.get(`/admin/banners/${this.$route.params.id}`)
+    } catch (error) {
+      console.log(error);
+    }
+    console.log(res.data);
+    this.banner.link = res.data.banner.link
+    this.productImageSources=[{
+      type: 'objectURL',
+      url: `${this.$config.url}/${res.data.banner.image_tm}`
+    }];
+    this.productImageSources2=[{
+      type: 'objectURL',
+      url: `${this.$config.url}/${res.data.banner.image_ru}`
+    }];
+  },
   methods:{
     deleteItem(item){
       this.dialogDelete = true;
@@ -101,17 +119,17 @@ export default {
     },
     uploadProductImages(images) {
       this.productImageSources = [];
-      this.productImageSources.push({
+      this.productImageSources=[{
         type: 'objectURL',
         url: URL.createObjectURL(images),
-      })
+      }]
     },
     uploadProductImages2(images) {
       this.productImageSources2 = [];
-      this.productImageSources2.push({
+      this.productImageSources2=[{
         type: 'objectURL',
         url: URL.createObjectURL(images),
-      })
+      }]
     },
 
     deleteUploadedImageWithIndex(index) {
@@ -119,22 +137,53 @@ export default {
       this.index = index;
     },
     async sendBanner(){
-      if(this.banner.imageTM.length!==0 && this.banner.imageRU.length!==0 && this.banner.link){
+      console.log(this.banner.imageTM.length)
+      if(this.productImageSources.length!=0 && this.productImageSources2.length!=0 && this.banner.link){
         try {
-          const res = await this.$axios.post(`/admin/banners/add`,{link: this.banner.link});
-          if(res.status == 201){
-            const ress = await this.$axios.post(`/admin/banners/upload-image-tm/${res.data.banner_id}`,this.returnFormData())
-            console.log(ress);
-            if(ress.status === 201){
-              const resss = await this.$axios.post(`/admin/banners/upload-image-ru/${res.data.banner_id}`,this.returnFormData2())
-              if(resss.status === 201){
-                this.$router.push('/banner')
+          const res = await this.$axios.patch(`/admin/banners/${this.$route.params.id}`,{link: this.banner.link});
+          if(res.status == 200){
+            if(this.banner.imageTM.length == undefined){
+              const ress = await this.$axios.post(`/admin/banners/upload-image-tm/${res.data.banner_id}`,this.returnFormData())
+              console.log(ress);
+              if(ress.status == 201){
+                if(this.banner.imageRU.length == undefined){
+                  const resss = await this.$axios.post(`/admin/banners/upload-image-ru/${res.data.banner_id}`,this.returnFormData2())
+                  console.log(resss);
+                  if(resss.status == 201){
+                    const element = document.createElement("a");
+                    element.setAttribute('href','/banner');
+                    element.click();
+                  }
+                }else{
+                  const element = document.createElement("a");
+                  element.setAttribute('href','/banner');
+                  element.click();
+                }
+              }
+            }else{
+              if(this.banner.imageRU.length == undefined){
+                const resss = await this.$axios.post(`/admin/banners/upload-image-ru/${res.data.banner_id}`,this.returnFormData2())
+                console.log(resss);
+                if(resss.status == 201){
+                  const element = document.createElement("a");
+                  element.setAttribute('href','/banner');
+                  element.click();
+                }
+              }else{
+                this.$router.push('/banner');
               }
             }
+          //   if(ress.status === 201){
+          //     if(resss.status === 201){
+          //       this.$router.push('/banner')
+          //     }
+          //   }
           }
         } catch (error) {
           console.log(error);
         }
+      }else{
+        alert("Boshluklary dolduryn")
       }
     },
     returnFormData(){

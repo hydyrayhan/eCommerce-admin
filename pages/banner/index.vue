@@ -9,7 +9,7 @@
     </v-btn>
 
     <v-card>
-      <v-card-title>
+      <!-- <v-card-title>
         <v-select
           :label="$t('filter')"
           :items="['Uludan kica', 'Kichiden ula']"
@@ -23,20 +23,24 @@
           single-line
           @keydown.enter="searchFunc"
         ></v-text-field>
-      </v-card-title>
+      </v-card-title> -->
       <v-data-table
         :headers="headers"
-        :items="products"
-        @pagination="paginationFunc"
+        :items="banners"
+        :server-items-length="count"
+        :options.sync="options"
       >
-        <template v-slot:[`item.product_image`]="{ item }">
+        <template v-slot:[`item.id`]="{ item }">
+          {{ Number((page-1))*10+Number(banners.indexOf(item)+1)}}
+        </template>
+        <template v-slot:[`item.image_tm`]="{ item }">
           <img 
-            :src="item.product_image[0]" 
+            :src="$config.url+'/'+item.image_tm" 
             :alt="item.name"
           />
         </template>
         <template v-slot:[`item.actions`]="{ item }">
-          <v-btn color="info" style="margin-right:10px" @click="$redirect(`/products/edit/${item.product_id}`)">
+          <v-btn color="info" style="margin-right:10px" @click="$redirect(`/banner/edit/${item.banner_id}`)">
             {{$t('open')}}
           </v-btn>
           <v-btn color="error" @click="deleteItem(item)">
@@ -67,19 +71,29 @@ export default {
   data(){
     return{
       search: '',
+      page:0,
       dialogDelete: false,
       headers: [],
+      options:{},
+      deleteItemValue:'',
     }
   },
   computed:{
      ...mapGetters({
       lang: 'language/language',
-      products: 'products/products',
+      banners: 'banner/banner',
+      count: 'banner/bannerCount',
     }),
   },
   watch:{
     lang(){
       this.changeHeader()
+    },
+    options: {
+      handler() {
+        this.getDessertsFromApi();
+      },
+      deep: true
     }
   },
   mounted(){
@@ -88,36 +102,49 @@ export default {
     document.querySelector(".v-data-footer__icons-after button span").innerHTML = '>';
   },
   methods:{
+    async getDessertsFromApi(searchValue) {
+      this.loading = true;
+      const { sortBy, sortDesc, page, itemsPerPage } = this.options;
+      this.page = page;
+      await this.$store.dispatch(`banner/fetchBanners` , {limit:itemsPerPage,offset:(page-1)*10});
+    },
     deleteItem(item){
       this.dialogDelete = true;
+      this.deleteItemValue = item;
     },
     closeDelete(){
       this.dialogDelete = false;
     },
-    deleteItemConfirm(){
+    async deleteItemConfirm(){
       this.dialogDelete = false;
-      console.log("men bolsa confirm functino");
+      // console.log(this.deleteItemValue)
+      try {
+        const res = await this.$axios.delete(`/admin/banners/${this.deleteItemValue.banner_id}`)
+        if(res.status == 200){
+          this.getDessertsFromApi();
+        }
+        // if(res.status == 200){
+        // }
+      } catch (error) {
+        console.log(error);
+      }
     },
     changeHeader(){
       if(this.lang === 'RU'){
         this.headers = [
-          {text: 'Идентификатор', value: 'product_id'},
-          { text: 'Линк', value: 'name' },
-          { text: 'Изображение', value: 'product_image' },
+          {text: 'Идентификатор', value: 'id'},
+          { text: 'Линк', value: 'link' },
+          { text: 'Изображение', value: 'image_tm' },
           { text: 'Действия', value: 'actions', sortable: false }
         ]
       }else{
         this.headers = [
-          {text: 'ID', value: 'product_id'},
-          { text: 'Link', value: 'name' },
-          { text: 'Suraty', value: 'product_image' },
+          {text: 'ID', value: 'id'},
+          { text: 'Link', value: 'link' },
+          { text: 'Suraty', value: 'image_tm' },
           { text: 'Actions', value: 'actions', sortable: false }
         ]
       }
-    },
-    paginationFunc(values){
-      console.log(values)
-      // off set hemde limit shu yerden alaymaly edip goydym
     },
     searchFunc(){
       console.log("men ishledim ahyry"+this.search)
@@ -127,5 +154,15 @@ export default {
 </script>
 
 <style>
-
+  .v-data-footer__select{
+    opacity: 0;
+  }
+  td{
+    min-height: 100px;
+    /* padding-bottom: 2px !important; */
+  }
+  td>img{
+    padding-bottom: 5px;
+    object-fit: cover;
+  }
 </style>
