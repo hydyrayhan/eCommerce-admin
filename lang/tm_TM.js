@@ -45,4 +45,6 @@ export default {
   active:"Aktiwe harytlar",
   notActive:"Aktiwe däl harytlar",
   seeAll:"Hemmesini görmek",
+  isActive:"Işjeň",
+  change:"Kurs",
 }

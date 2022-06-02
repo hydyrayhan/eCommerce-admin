@@ -263,6 +263,13 @@
         >
         </v-checkbox>
       </v-col>
+      <v-col cols="3">
+        <v-checkbox
+          v-model="product.isActive"
+          :label="$t('isActive')"
+        >
+        </v-checkbox>
+      </v-col>
     </v-row>
 
     <v-btn color="info" @click="sendProduct">{{$t('save')}}</v-btn>
@@ -304,6 +311,7 @@ export default {
         price_usd:null,
         isAction:false, //aksiya barmy yok
         isGift:false,
+        isActive:false,
         category_id:'',
         subcategory_id:'',
         brand_id:'',
@@ -371,6 +379,7 @@ export default {
     }
     this.product.isGift = res.data.isGift;
     this.product.isAction = res.data.isAction;
+    this.product.isActive = res.data.isActive;
   },
   computed:{
     ...mapGetters({
