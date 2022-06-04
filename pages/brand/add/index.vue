@@ -8,6 +8,15 @@
           @change="uploadProductImages"
         ></v-file-input>
       </v-col>
+      <v-col cols="5">
+        <v-select
+          :items="kategories.name"
+          @change="chooseCategory($event)"
+          style="margin-top:-30px;"
+          :label="$t('chooseCategory')"
+          v-model="category"
+        ></v-select>
+      </v-col>
       <v-col cols="1"></v-col>
       <!-- <v-col cols="5"></v-col> -->
       <v-col cols="12">
@@ -24,10 +33,17 @@ export default {
     return {
       brand:{
         name:'',
-        images:[]
+        images:[],
       },
+      category:'',
       productImageSources: [],
+      choosenKategoryId:null,
     }
+  },
+  computed:{
+    ...mapGetters({
+      kategories: 'kategory/kategoryNames',
+    }),
   },
   mounted(){
     document.querySelector(".brand_add .v-input__icon button").innerHTML='<svg height="20" width="20"><path d="M10 13.271 5.708 8.979 6.958 7.729 9.125 9.896V3.333H10.875V9.896L13.042 7.729L14.292 8.979ZM5.083 16.667Q4.354 16.667 3.844 16.156Q3.333 15.646 3.333 14.917V12.5H5.083V14.917Q5.083 14.917 5.083 14.917Q5.083 14.917 5.083 14.917H14.917Q14.917 14.917 14.917 14.917Q14.917 14.917 14.917 14.917V12.5H16.667V14.917Q16.667 15.646 16.156 16.156Q15.646 16.667 14.917 16.667Z" fill="#FFFFFF"/></svg>'
@@ -44,18 +60,33 @@ export default {
         })
       }
     },
-    async sendBrand(){
-      try {
-        const res = await this.$axios.post(`/admin/brands/add`,{name: this.brand.name})
-        if(res.status == 201){
-          const ress = await this.$axios.post(`/admin/brands/upload-image/${res.data.brand_id}`,this.returnBrandFormData())
-          if(ress.status === 201){
-            await this.$store.dispatch('brand/fetchbrand',{limit:10,offset:0})
-            this.$router.push('/brand')
-          }
+    chooseCategory(e){
+      for(let i = 0; i<this.kategories.name.length; i++){
+        if(this.kategories.name[i] == e){
+          this.choosenKategoryId = this.kategories.id[i];
         }
-      } catch (error) {
-        console.log(error);
+      }
+    },
+    async sendBrand(){
+      console.log()
+      if(this.brand.name && this.choosenKategoryId && this.brand.images.length !== 0){
+        try {
+          const res = await this.$axios.post(`/admin/brands/add`,{name: this.brand.name})
+          if(res.status == 201){
+            const ress = await this.$axios.post(`/admin/brands/upload-image/${res.data.brand_id}`,this.returnBrandFormData())
+            if(ress.status === 201){
+              const resss = await this.$axios.post(`/admin/brands/add-category/${res.data.brand_id}`,{category_id:this.choosenKategoryId});
+              if(resss.status == 201){
+                await this.$store.dispatch('brand/fetchbrand',{limit:10,offset:0})
+                this.$router.push('/brand')
+              }
+            }
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      }else{
+        alert("boshluklary dolduryn")
       }
     },
     returnBrandFormData(){
