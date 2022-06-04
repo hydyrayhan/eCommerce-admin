@@ -1,12 +1,10 @@
 export const actions = {
   async nuxtServerInit({ dispatch }) {
-    // const adminToken = this.$cookies.get('admin-token')
-
-    // if (adminToken) {
-    //   dispatch('admin/setAdminToken', adminToken)
-    //   await dispatch('fetchData')
-    // }
+    const adminToken = this.$cookies.get('admin-token')
+    if (adminToken) {
+      dispatch('admin/setAdminToken', adminToken)
       await dispatch('fetchData')
+    }
   },
 
   async fetchData({ dispatch }) {
@@ -16,5 +14,6 @@ export const actions = {
     await dispatch('kategory/fetchkategory')
     await dispatch('brand/fetchbrand',{limit:10,offset:0})
     await dispatch('banner/fetchBanners',{limit:10,offset:0})
+    await dispatch('gifts/fetchGifts',{limit:10,offset:0})
   },
 }

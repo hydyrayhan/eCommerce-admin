@@ -150,14 +150,18 @@ export default {
                   const resss = await this.$axios.post(`/admin/banners/upload-image-ru/${res.data.banner_id}`,this.returnFormData2())
                   console.log(resss);
                   if(resss.status == 201){
-                    const element = document.createElement("a");
-                    element.setAttribute('href','/banner');
-                    element.click();
+                    await this.$store.dispatch('banner/fetchBanners',{offset:0,limit:10})
+                    await this.$router.push('/banner');
+                    // const element = document.createElement("a");
+                    // element.setAttribute('href','/banner');
+                    // element.click();
                   }
                 }else{
-                  const element = document.createElement("a");
-                  element.setAttribute('href','/banner');
-                  element.click();
+                  // const element = document.createElement("a");
+                  // element.setAttribute('href','/banner');
+                  // element.click();
+                  await this.$store.dispatch('banner/fetchBanners',{offset:0,limit:10})
+                  await this.$router.push('/banner');
                 }
               }
             }else{
@@ -165,9 +169,11 @@ export default {
                 const resss = await this.$axios.post(`/admin/banners/upload-image-ru/${res.data.banner_id}`,this.returnFormData2())
                 console.log(resss);
                 if(resss.status == 201){
-                  const element = document.createElement("a");
-                  element.setAttribute('href','/banner');
-                  element.click();
+                  // const element = document.createElement("a");
+                  await this.$store.dispatch('banner/fetchBanners',{offset:0,limit:10})
+                  await this.$router.push('/banner');
+                  // element.setAttribute('href','/banner');
+                  // element.click();
                 }
               }else{
                 this.$router.push('/banner');

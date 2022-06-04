@@ -54,6 +54,8 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    'cookie-universal-nuxt',
+    '@nuxtjs/pwa',
     [
       '@nuxtjs/i18n',
       {

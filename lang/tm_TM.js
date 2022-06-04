@@ -47,4 +47,5 @@ export default {
   seeAll:"Hemmesini görmek",
   isActive:"Işjeň",
   change:"Kurs",
+  gift:"Sowgatlar",
 }
