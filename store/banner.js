@@ -14,7 +14,6 @@ export const actions = {
   async fetchBanners({ commit },obj) {
     // const products= require('~/assets/data/product.json');
     const { data } = await this.$axios.get(`/admin/banners?offset=${obj.offset}&limit=${obj.limit}`)
-    // console.log(data);
     commit('SET_BANNERS', data.banners);
   },
 }

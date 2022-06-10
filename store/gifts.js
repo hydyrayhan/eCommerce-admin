@@ -14,7 +14,6 @@ export const actions = {
   async fetchGifts({ commit },obj) {
     // const products= require('~/assets/data/product.json');
     const { data } = await this.$axios.get(`/admin/gifts?offset=${obj.offset}&limit=${obj.limit}`)
-    console.log(data);
     commit('SET_GIFTS', data);
   },
 }

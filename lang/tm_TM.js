@@ -48,4 +48,5 @@ export default {
   isActive:"Işjeň",
   change:"Kurs",
   gift:"Sowgatlar",
+  texts:"Tekstler",
 }
