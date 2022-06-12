@@ -15,5 +15,6 @@ export const actions = {
     await dispatch('brand/fetchbrand',{limit:10,offset:0})
     await dispatch('banner/fetchBanners',{limit:10,offset:0})
     await dispatch('gifts/fetchGifts',{limit:10,offset:0})
+    await dispatch('text/fetchTexts',{limit:10,offset:0})
   },
 }

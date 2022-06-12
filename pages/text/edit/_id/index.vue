@@ -28,7 +28,7 @@
         v-quill:fullDescriptionRU="{}"
       />
     </v-col>
-    <v-btn color="info" style="margin-top:50px" @click="send">{{$t('save')}}</v-btn>
+    <v-btn color="info" style="margin-top:50px" @click="send" >{{$t('save')}}</v-btn>
   </div>
 </template>
 
@@ -47,22 +47,26 @@ export default {
       ],
     }
   },
-  async asyncData({ $axios, route }) {
-    // try {
-    //   const productId = route.params.id;
-    //   let { data } = await $axios.get(`/public/products/${productId}`);
-    //   const {oneProduct} = data;
-    //   const {recommenendations} = data;
-    //   const  product  = oneProduct;
-    //   return { product, recommenendations }
-    // } catch (err) {
-    //   console.log(err)
-    // }
+  async mounted(){
+    try {
+      const productId = this.$route.params.id;
+      let { data } = await this.$axios.get(`/public/texts/${productId}`);
+      this.text = data
+    } catch (err) {
+      console.log(err)
+    }
   },
   methods:{
     async send(){
       if(this.text.body_tm && this.text.body_ru && this.text.name_tm && this.text.name_ru){
-        console.log(this.text);
+        try {
+          const {status} = await this.$axios.patch('/admin/texts/'+this.$route.params.id,this.text)
+          if(status === 200){
+            this.$router.push('/text')
+          }
+        } catch (error) {
+          console.log(error)
+        }
       }else{
         alert("Boshluklary dolduryn");
       }

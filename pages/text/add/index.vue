@@ -50,7 +50,14 @@ export default {
   methods:{
     async send(){
       if(this.text.body_tm && this.text.body_ru && this.text.name_tm && this.text.name_ru){
-        console.log(this.text);
+        try {
+          const {status} = await this.$axios.post('/admin/texts/add',this.text)
+          if(status === 201){
+            this.$router.push('/text')
+          }
+        } catch (error) {
+          console.log(error)
+        }
       }else{
         alert("Boshluklary dolduryn");
       }

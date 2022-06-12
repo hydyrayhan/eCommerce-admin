@@ -10,19 +10,21 @@
 
     <v-card>
       <v-card-title>
-        <v-select
+        <!-- <v-select
           :label="$t('filter')"
           :items="[`${$t('active')}`,`${$t('notActive')}`,`${$t('seeAll')}` ]"
           @change="filter($event)"
           single-line
-        ></v-select>
-        <v-spacer></v-spacer>
-        <v-text-field
-          v-model="search"
-          :label="$t('search')"
-          single-line
-          @keydown.enter="searchFunc"
-        ></v-text-field>
+        ></v-select> -->
+        <!-- <v-spacer></v-spacer> -->
+        <!-- <v-col cols="6">
+          <v-text-field
+            v-model="search"
+            :label="$t('search')"
+            single-line
+            @keydown.enter="searchFunc"
+          ></v-text-field>
+        </v-col> -->
       </v-card-title>
       <v-data-table
         :headers="headers"
@@ -33,14 +35,8 @@
         <template v-slot:[`item.id`]="{ item }">
           {{Number(page-1)*10+Number(products.indexOf(item)+1)}}
         </template>
-        <template v-slot:[`item.product_image`]="{ item }">
-          <img 
-            :src="$config.url+'/'+item.images[0].image" 
-            :alt="item.name"
-          />
-        </template>
         <template v-slot:[`item.actions`]="{ item }">
-          <v-btn color="info" style="margin-right:10px" @click="$redirect(`/products/edit/${item.product_id}`)">
+          <v-btn color="info" style="margin-right:10px" @click="$redirect(`/text/edit/${item.text_id}`)">
             {{$t('open')}}
           </v-btn>
           <v-btn color="error" @click="deleteItem(item)">
@@ -81,8 +77,8 @@ export default {
   computed:{
      ...mapGetters({
       lang: 'language/language',
-      products: 'products/products',
-      count: 'products/productsCount',
+      products: 'text/text',
+      count: 'text/textCount',
     }),
   },
   watch:{
@@ -106,7 +102,7 @@ export default {
       this.loading = true;
       const { sortBy, sortDesc, page, itemsPerPage } = this.options;
       this.page = page;
-      await this.$store.dispatch(`products/fetchProducts` , {limit:itemsPerPage,offset:(page-1)*10,name:sortBy[0],bool:sortDesc[0],keyword:searchValue,isActive:active});
+      await this.$store.dispatch(`text/fetchTexts` , {limit:itemsPerPage,offset:(page-1)*10,name:sortBy[0],bool:sortDesc[0],keyword:searchValue,isActive:active});
     },
     deleteItem(item){
       this.dialogDelete = true;
@@ -118,7 +114,7 @@ export default {
     async deleteItemConfirm(){
       this.dialogDelete = false;
       try {
-        const res = await this.$axios.delete(`/admin/products/${this.deleteItemValue.product_id}`)
+        const res = await this.$axios.delete(`/admin/texts/${this.deleteItemValue.text_id}`)
         if(res.status == 200){
           this.getDessertsFromApi();
         }
@@ -131,16 +127,14 @@ export default {
         this.headers = [
           {text: 'Идентификатор', value: 'id'},
           { text: 'Имя', value: 'name_ru' },
-          { text: 'Изображение', value: 'product_image' },
-          { text: 'Код продукта', value: 'product_code' },
+          { text: 'Link', value: 'link'},
           { text: 'Действия', value: 'actions', sortable: false }
         ]
       }else{
         this.headers = [
           {text: 'ID', value: 'id'},
           { text: 'Ady', value: 'name_tm' },
-          { text: 'Suraty', value: 'product_image' },
-          { text: 'Haryt kody', value: 'product_code' },
+          { text: 'Link', value: 'link'},
           { text: 'Actions', value: 'actions', sortable: false }
         ]
       }
