@@ -45,4 +45,14 @@ export default {
   active:"Aktiwe harytlar",
   notActive:"Aktiwe däl harytlar",
   seeAll:"Hemmesini görmek",
+  isActive:"Işjeň",
+  change:"Kurs",
+  gift:"Sowgatlar",
+  texts:"Tekstler",
+  waiting:"Garaşylýar",
+  accepted:'Kabul edildi',
+  delivered:"Gowşuryldy",
+  canceled:"Yatyryldy",
+  brandAddError:"Brand goshmak ucin ilki kategory doredin",
+  productAddError:"Product goshmak ucin ilki kategory we brand doreding"
 }

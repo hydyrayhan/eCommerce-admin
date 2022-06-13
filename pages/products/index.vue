@@ -1,9 +1,13 @@
 <template>
   <div>
+    <v-alert type="error" :text="true" :value="!(categories.length>0 && brands > 0)">
+      {{$t('productAddError')}}
+    </v-alert>
     <v-btn
       color="info"
       class="mb-5"
       @click="$redirect('/products/add')"
+      :disabled="!(categories.length>0 && brands > 0)"
     >
     {{$t('add')}} 
     </v-btn>
@@ -83,6 +87,8 @@ export default {
       lang: 'language/language',
       products: 'products/products',
       count: 'products/productsCount',
+      categories:'kategory/kategory',
+      brands:'brand/brandCount',
     }),
   },
   watch:{

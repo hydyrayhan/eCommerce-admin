@@ -4,7 +4,7 @@
       <v-card-title>
         <v-select
           :label="$t('filter')"
-          :items="['Uludan kica', 'Kichiden ula']"
+          :items="[`${$t('waiting')}`,`${$t('accepted')}`,`${$t('delivered')}`,`${$t('canceled')}`,`${$t('seeAll')}`]"
           @change="filter($event)"
           single-line
         ></v-select>
@@ -19,8 +19,13 @@
       <v-data-table
         :headers="headers"
         :items="desserts"
-        @pagination="paginationFunc"
+        :server-items-length="count"
+        :options.sync="options"
       >
+        <template v-slot:[`item.id`]="{ item }">
+          {{Number(page-1)*10+Number(desserts.indexOf(item)+1)}}
+        </template>
+
         <template v-slot:[`item.actions`]="{ item }">
           <v-btn color="info" style="margin-right:10px" @click="$redirect(`/orders/${item.order_id}`)">
             {{$t('open')}}
@@ -55,17 +60,27 @@ export default {
       search: '',
       dialogDelete: false,
       headers: [],
+      page:1,
+      options:{},
+      deleteItemValue:{}
     }
   },
   computed:{
      ...mapGetters({
       desserts: 'orders/orders',
       lang: 'language/language',
+      count: 'orders/count'
     }),
   },
   watch:{
     lang(){
       this.changeHeader()
+    },
+    options: {
+      handler() {
+        this.getDessertsFromApi();
+      },
+      deep: true
     }
   },
   mounted(){
@@ -74,43 +89,60 @@ export default {
     document.querySelector(".v-data-footer__icons-after button span").innerHTML = '>';
   },
   methods:{
-    filter(value){
-      console.log(value)
+    async getDessertsFromApi(searchValue,active) {
+      this.loading = true;
+      const { sortBy, sortDesc, page, itemsPerPage } = this.options;
+      this.page = page;
+      await this.$store.dispatch(`orders/fetchOrders` , {limit:itemsPerPage,offset:(page-1)*10,keyword:searchValue,status:active});
+    },
+    filter(e){
+      console.log(e);
+      if(e == 'Hemmesini görmek'){
+        this.getDessertsFromApi(this.search,undefined);
+      }else{
+        this.getDessertsFromApi(this.search,e);
+      }
     },
     deleteItem(item){
       this.dialogDelete = true;
+      this.deleteItemValue = item
     },
     closeDelete(){
       this.dialogDelete = false;
     },
-    deleteItemConfirm(){
+    async deleteItemConfirm(){
       this.dialogDelete = false;
-      console.log("men bolsa confirm functino");
+      console.log(this.deleteItemValue)
+      try {
+        const res = await this.$axios.delete(`/admin/orders/${this.deleteItemValue.order_id}`);
+        if(res.status == 200){
+          this.getDessertsFromApi();
+        }
+      } catch (error) {
+        console.log(error);
+      }
     },
     changeHeader(){
       if(this.lang === 'RU'){
         this.headers = [
-          {text: 'Идентификатор', value: 'order_id'},
-          { text: 'Имя', value: 'name' },
+          {text: 'Идентификатор', value: 'id'},
+          { text: 'Имя', value: 'user_name' },
           { text: 'Статус', value: 'status' },
-          { text: 'Дата/Время', value: 'date' },
+          { text: 'Дата/Время', value: 'delivery_time' },
           { text: 'Действия', value: 'actions', sortable: false }
         ]
       }else{
         this.headers = [
-          {text: 'ID', value: 'order_id'},
-          { text: 'Ady', value: 'name' },
+          {text: 'ID', value: 'id'},
+          { text: 'Ady', value: 'user_name' },
           { text: 'Ýagdaýy', value: 'status' },
-          { text: 'Senesi/wagty', value: 'date' },
+          { text: 'Senesi/wagty', value: 'delivery_time' },
           { text: 'Actions', value: 'actions', sortable: false }
         ]
       }
     },
-    paginationFunc(values){
-      // off set hemde limit shu yerden alaymaly edip goydym
-    },
     searchFunc(){
-      console.log("men ishledim ahyry"+this.search)
+      this.getDessertsFromApi(this.search)
     }
   }
 }

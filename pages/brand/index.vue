@@ -1,8 +1,12 @@
 <template>
   <div>
+    <v-alert type="error" :text="true" :value="!(categories.length>0)">
+      {{$t('brandAddError')}}
+    </v-alert>
     <v-btn
       color="info"
       class="mb-5"
+      :disabled="!(categories.length>0)"
       @click="$redirect('/brand/add')"
     >
       {{$t('add')}} 
@@ -79,6 +83,7 @@ export default {
       brands: 'brand/brand',
       count: 'brand/brandCount',
       brandsearch: 'brand/brandsearch',
+      categories:'kategory/kategory',
     }),
   },
   watch:{

@@ -49,4 +49,10 @@ export default {
   change:"Kurs",
   gift:"Sowgatlar",
   texts:"Tekstler",
+  waiting:"Garashylyar",
+  accepted:'Kabul edildi',
+  delivered:"Gowshuryldy",
+  canceled:"Yatyryldy",
+  brandAddError:"Brand goshmak ucin ilki kategory doredin",
+  productAddError:"Product goshmak ucin ilki kategory we brand doreding"
 }

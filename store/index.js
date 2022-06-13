@@ -8,7 +8,7 @@ export const actions = {
   },
 
   async fetchData({ dispatch }) {
-    await dispatch('orders/fetchOrders')
+    await dispatch('orders/fetchOrders',{limit:10,offset:0})
     await dispatch('language/fetchLanguage')
     await dispatch('products/fetchProducts',{limit:10,offset:0})
     await dispatch('kategory/fetchkategory')
