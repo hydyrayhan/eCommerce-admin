@@ -27,6 +27,15 @@
         </template>
 
         <template v-slot:[`item.actions`]="{ item }">
+            <v-btn
+              :loading="loadingOne"
+              :disabled="loadingOne"
+              color="blue-grey"
+              class="ma-2 white--text"
+              @click="loader(item.order_id)"
+            >
+              {{$t('download')}}
+            </v-btn>
           <v-btn color="info" style="margin-right:10px" @click="$redirect(`/orders/${item.order_id}`)">
             {{$t('open')}}
           </v-btn>
@@ -49,6 +58,8 @@
         </template>
       </v-data-table>
     </v-card>
+    <div  class="download" @click="download()">{{$t('download')}}</div>
+    <a class="excel" style="display:none" href="">ok</a>
   </div>
 </template>
 
@@ -57,6 +68,7 @@ import { mapGetters } from 'vuex'
 export default {
   data () {
     return {
+      loadingOne:false,
       search: '',
       dialogDelete: false,
       headers: [],
@@ -81,7 +93,7 @@ export default {
         this.getDessertsFromApi();
       },
       deep: true
-    }
+    },
   },
   mounted(){
     this.changeHeader()
@@ -143,10 +155,28 @@ export default {
     },
     searchFunc(){
       this.getDessertsFromApi(this.search)
+    },
+    async download(){
+      const excel = document.querySelector(".excel");
+      excel.setAttribute('href',`${this.$config.url}/admin/orders/hasabat`);
+      excel.click();  
+    },
+    async loader(id){
+      const excel = document.querySelector(".excel");
+      excel.setAttribute('href',`${this.$config.url}/admin/orders/check/${id}/check`);
+      excel.click(); 
     }
   }
 }
 </script>
 
 <style>
+  .download{
+    cursor: pointer;
+    margin-top: 20px;
+    border: 1px solid white;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+  }
 </style>

@@ -147,7 +147,7 @@ export default {
           { text: 'Идентификатор', value: 'id'},
           { text: 'Имя', value: 'name_ru' },
           { text: 'Изображение', value: 'image' },
-          { text: 'Цена', value: 'price' },
+          { text: 'Цена', value: 'total_price' },
           { text: 'Код продукта', value: 'product_code' },
           { text: 'Количество', value: 'quantity' },
         ]
@@ -156,7 +156,7 @@ export default {
           { text: 'ID', value: 'id'},
           { text: 'Ady', value: 'name_tm' },
           { text: 'Suraty', value: 'image' },
-          { text: 'Bahasy', value: 'price' },
+          { text: 'Bahasy', value: 'total_price' },
           { text: 'Hary kody', value: 'product_code' },
           { text: 'Sany', value: 'quantity' },
         ]
@@ -179,24 +179,19 @@ export default {
         this.snackText = 'Data saved'
         let id ;
         let quantity;
-        console.log(this.orderProducts)
         for(let i =0; i< this.orderProducts.length; i++){
           const type = typeof(this.orderProducts[i].quantity)
           if(type == 'string'){
             quantity = Number(this.orderProducts[i].quantity)
             id = this.orderProducts[i].order_product_id;
-            console.log(quantity,)
-            console.log(id);
             try {
               quantity = Number(quantity)
               const {data} = await this.$axios.patch(`/admin/orders/product/${id}`,{quantity}) 
-              console.log(data)
             } catch (error) {
               console.log(error)
             }
           }
         }
-        console.log("shu yerder quantityny db e ugratmaly")
       },
       cancel () {
         this.snack = true

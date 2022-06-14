@@ -54,5 +54,6 @@ export default {
   delivered:"Gowshuryldy",
   canceled:"Yatyryldy",
   brandAddError:"Brand goshmak ucin ilki kategory doredin",
-  productAddError:"Product goshmak ucin ilki kategory we brand doreding"
+  productAddError:"Product goshmak ucin ilki kategory we brand doreding",
+  download:"Download",
 }
