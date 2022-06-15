@@ -76,7 +76,6 @@ export default {
 
         if (isValid) {
           const { data } = await this.$axios.post('/admin/login', this.admin)
-          console.log(data);
           const { token } = data
           const user = data.data.admin.username
           this.$store.dispatch('admin/setAdmin', user)

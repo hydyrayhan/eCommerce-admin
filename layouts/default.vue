@@ -232,6 +232,42 @@
         </v-list-item>
       </v-list>
 
+      <v-list>
+        <v-list-item
+          to="/profile"
+          router
+          exact
+        >
+        <v-list-item-action>
+          <svg width="16" height="16" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 6C7.65685 6 9 4.65685 9 3C9 1.34315 7.65685 0 6 0C4.34315 0 3 1.34315 3 3C3 4.65685 4.34315 6 6 6ZM8 3C8 4.10457 7.10457 5 6 5C4.89543 5 4 4.10457 4 3C4 1.89543 4.89543 1 6 1C7.10457 1 8 1.89543 8 3Z" fill="white"/>
+            <path d="M12 11C12 12 11 12 11 12H1C1 12 0 12 0 11C0 10 1 7 6 7C11 7 12 10 12 11ZM11 10.9965C10.9986 10.7497 10.8462 10.0104 10.1679 9.33211C9.51563 8.67985 8.2891 8 5.99999 8C3.71088 8 2.48435 8.67985 1.8321 9.33211C1.15375 10.0104 1.00142 10.7497 1 10.9965H11Z" fill="white"/>
+          </svg>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title v-text="$t('profile')" />
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+      
+      <v-list>
+        <v-list-item
+          to="/newProductDate"
+          router
+          exact
+        >
+        <v-list-item-action>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 3.5C8 3.22386 7.77614 3 7.5 3C7.22386 3 7 3.22386 7 3.5V9C7 9.17943 7.09614 9.3451 7.25193 9.43412L10.7519 11.4341C10.9917 11.5711 11.2971 11.4878 11.4341 11.2481C11.5711 11.0083 11.4878 10.7029 11.2481 10.5659L8 8.70984V3.5Z" fill="white" stroke="white"/>
+            <path d="M8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16ZM15 8C15 11.866 11.866 15 8 15C4.13401 15 1 11.866 1 8C1 4.13401 4.13401 1 8 1C11.866 1 15 4.13401 15 8Z" fill="white" stroke= 'white'/>
+          </svg>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title v-text="$t('newProductDate')" />
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+
     </v-navigation-drawer>
     <!-- Header -->
     <v-app-bar :clipped-left="clipped" fixed app>

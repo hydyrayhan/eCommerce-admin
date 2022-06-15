@@ -129,7 +129,6 @@ export default {
       let { data } = await $axios.get(`/admin/orders/order-products/${productId}`);
       const {order} = data;
       const {orderProducts} = data;
-      console.log(data);
       return { order, orderProducts }
     } catch (err) {
       console.log(err)
@@ -184,12 +183,18 @@ export default {
           if(type == 'string'){
             quantity = Number(this.orderProducts[i].quantity)
             id = this.orderProducts[i].order_product_id;
+            // console.log(quantity,id)
             try {
               quantity = Number(quantity)
               const {data} = await this.$axios.patch(`/admin/orders/product/${id}`,{quantity}) 
+              if(data){
+                this.order.total_price = data.order.total_price.toFixed(2);
+                this.order.total_quantity = data.order.total_quantity
+              }
             } catch (error) {
               console.log(error)
             }
+            break;
           }
         }
       },
@@ -204,7 +209,6 @@ export default {
         this.snackText = 'Dialog opened'
       },
       close () {
-        console.log('Dialog closed')
       },
   }
 }

@@ -20,7 +20,6 @@ export const actions = {
 
   setAdminToken({commit}, adminToken) {
     this.$axios.setHeader('Authorization', `Bearer ${adminToken}`)
-
     commit("SET_ADMIN_TOKEN", adminToken)
   }
 }

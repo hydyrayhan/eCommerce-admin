@@ -50,10 +50,16 @@ export default {
   gift:"Sowgatlar",
   texts:"Tekstler",
   waiting:"Garashylyar",
-  accepted:'Kabul edildi',
+  accepted:"Kabul edildi",
   delivered:"Gowshuryldy",
   canceled:"Yatyryldy",
   brandAddError:"Brand goshmak ucin ilki kategory doredin",
   productAddError:"Product goshmak ucin ilki kategory we brand doreding",
   download:"Download",
+  profile : "Profile",
+  username: "User name",
+  password: "kone Achar sozi",
+  newPassword:"Taze achar sozi",
+  newPasswordConfirm:"Taze taze achar sozi",
+  newProductDate:"Taze haryt guni"
 }

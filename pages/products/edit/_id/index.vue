@@ -475,7 +475,7 @@ export default {
       }else if(this.data.priceUnit === 'TMT'){
         this.product.price_tm = Number(this.data.price)
       }
-      if(this.productImageSources.length>0 && this.product.name_tm && this.product.name_ru && this.product.product_code && this.product.stock && this.data.price && this.data.priceUnit && (this.product.discount==0 || this.product.discount>0) && this.product.brand_id && this.product.category_id){ //body bosh bolup barsa mesele bolarmy soramaly
+      if(this.productImageSources.length>0 && this.product.name_tm && this.product.name_ru && this.product.product_code && this.data.price && this.data.priceUnit && (this.product.discount==0 || this.product.discount>0) && this.product.brand_id && this.product.category_id){ //body bosh bolup barsa mesele bolarmy soramaly
         try {
           const res = await this.$axios.patch(`/admin/products/${this.product_id}`, this.product);
           if(res.status == 200){
