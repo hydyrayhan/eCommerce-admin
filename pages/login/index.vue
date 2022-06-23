@@ -2,7 +2,7 @@
   <v-card
     class="fill-height login-form__wrapper d-flex flex-column justify-center align-center"
   >
-    <h2>Добро пожаловать обратно</h2>
+    <h2>{{$t('wellcomeBack')}}</h2>
     <v-form
       ref="login-form"
       v-model="valid"
@@ -13,7 +13,7 @@
       <v-text-field
         v-model="admin.username"
         :rules="phoneNumberRules"
-        label="Телефонный номер"
+        :label="$t('phoneNumber')"
         required
         class="mb-5"
       ></v-text-field>
@@ -22,7 +22,7 @@
         type="password"
         v-model="admin.password"
         :rules="passwordRules"
-        label="Пароль"
+        :label="$t('pass')"
         required
         class="mb-5"
       ></v-text-field>
@@ -34,7 +34,7 @@
         type="submit"
         :loading="loggingIn"
       >
-        Login
+        login
       </v-btn>
     </v-form>
   </v-card>

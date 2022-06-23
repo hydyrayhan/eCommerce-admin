@@ -173,10 +173,8 @@ export default {
   }
   td{
     min-height: 100px;
-    padding-bottom: 2px !important;
   }
   td>img{
-    padding-bottom: 5px;
     object-fit: cover;
   }
 </style>

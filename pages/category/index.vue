@@ -35,7 +35,7 @@
             class="mb-5"
             @click="$redirect('/category/edit/'+kategory.id)"
           >
-            {{$t('edit')}}
+            {{$t('open')}}
           </v-btn>
           <v-btn
             color="error"

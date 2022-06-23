@@ -61,5 +61,8 @@ export default {
   password: "kone Achar sozi",
   newPassword:"Taze achar sozi",
   newPasswordConfirm:"Taze taze achar sozi",
-  newProductDate:"Taze haryt guni"
+  newProductDate:"Taze haryt guni",
+  pass:"Açar sözi",
+  wellcomeBack:"Hoş geldiňiz",
+  fillFree:"Boşluklary dolduryň",
 }

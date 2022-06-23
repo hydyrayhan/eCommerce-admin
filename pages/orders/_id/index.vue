@@ -19,7 +19,7 @@
           <v-col cols="5">
             <v-select
               v-model="status[lang]"
-              :items="[`${$t('waiting')}`,`${$t('accepted')}`,`${$t('delivered')}`,`${$t('canceled')}`]"
+              :items="['Garashylyar',`Kabul edildi`,`Gowshuryldy`,`Yatyryldy`]"
               @change="statusChange($event)"
               style="margin-top:-30px; margin-left:-10px"
             ></v-select>

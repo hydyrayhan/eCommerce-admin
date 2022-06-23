@@ -58,30 +58,20 @@
 
       <v-list>
         <v-list-item
-          to="/banner"
+          to="/gift"
           router
           exact
         >
-          <v-list-item-action>
-            <svg height="20" width="20"><path d="M3.417 17.5Q2.688 17.5 2.177 16.99Q1.667 16.479 1.667 15.75V2.5L3.062 3.896L4.438 2.5L5.833 3.896L7.229 2.5L8.604 3.896L10 2.5L11.396 3.896L12.771 2.5L14.167 3.896L15.562 2.5L16.938 3.896L18.333 2.5V15.75Q18.333 16.479 17.823 16.99Q17.312 17.5 16.583 17.5ZM3.417 15.75H9.125V10.75H3.417V15.75Q3.417 15.75 3.417 15.75Q3.417 15.75 3.417 15.75ZM10.875 15.75H16.583Q16.583 15.75 16.583 15.75Q16.583 15.75 16.583 15.75V14.125H10.875ZM10.875 12.375H16.583V10.75H10.875ZM3.417 9H16.583V6.667H3.417Z" fill="#FFFFFF"/></svg>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title v-text="$t('banners')" />
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
+        <v-list-item-action>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 2.5C3 1.11929 4.11929 0 5.5 0C6.88071 0 8 1.11929 8 2.5C8 1.11929 9.11929 0 10.5 0C11.8807 0 13 1.11929 13 2.5L13 2.50557C13 2.57543 13.0001 2.77567 12.9622 3H15C15.5523 3 16 3.44772 16 4V5C16 5.55228 15.5523 6 15 6H1C0.447716 6 0 5.55229 0 5V4C0 3.44772 0.447715 3 1 3H3.03783C2.99987 2.77567 2.99996 2.57543 3 2.50557L3 2.5ZM4.06799 3H7V2.5C7 1.67157 6.32843 1 5.5 1C4.67157 1 4 1.67157 4 2.5C4 2.58475 4.00195 2.77351 4.04488 2.93094C4.05252 2.95895 4.06044 2.98186 4.06799 3ZM9 3H11.932C11.9396 2.98186 11.9475 2.95895 11.9551 2.93094C11.9981 2.77351 12 2.58475 12 2.5C12 1.67157 11.3284 1 10.5 1C9.67157 1 9 1.67157 9 2.5V3Z" fill="white"/>
+            <path d="M15 7V14.5C15 15.3284 14.3284 16 13.5 16H9V7H15Z" fill="white"/>
+            <path d="M2.5 16C1.67157 16 1 15.3284 1 14.5V7H7V16H2.5Z" fill="white"/>
+          </svg>
 
-      <v-list>
-        <v-list-item
-          to="/category"
-          router
-          exact
-        >
-          <v-list-item-action>
-            <svg  height="20" width="20"><path d="M2.5 9.125V2.5H9.125V9.125ZM2.5 17.5V10.875H9.125V17.5ZM10.875 9.125V2.5H17.5V9.125ZM10.875 17.5V10.875H17.5V17.5ZM4.25 7.375H7.375V4.25H4.25ZM12.625 7.375H15.75V4.25H12.625ZM12.625 15.75H15.75V12.625H12.625ZM4.25 15.75H7.375V12.625H4.25ZM12.625 7.375ZM12.625 12.625ZM7.375 12.625ZM7.375 7.375Z" fill="#FFFFFF"/></svg>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title v-text="$t('category')" />
+            <v-list-item-title v-text="$t('gift')" />
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -97,6 +87,61 @@
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title v-text="$t('brand')" />
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+
+      <v-list>
+        <v-list-item
+          to="/banner"
+          router
+          exact
+        >
+          <v-list-item-action>
+            <svg height="20" width="20"><path d="M3.417 17.5Q2.688 17.5 2.177 16.99Q1.667 16.479 1.667 15.75V2.5L3.062 3.896L4.438 2.5L5.833 3.896L7.229 2.5L8.604 3.896L10 2.5L11.396 3.896L12.771 2.5L14.167 3.896L15.562 2.5L16.938 3.896L18.333 2.5V15.75Q18.333 16.479 17.823 16.99Q17.312 17.5 16.583 17.5ZM3.417 15.75H9.125V10.75H3.417V15.75Q3.417 15.75 3.417 15.75Q3.417 15.75 3.417 15.75ZM10.875 15.75H16.583Q16.583 15.75 16.583 15.75Q16.583 15.75 16.583 15.75V14.125H10.875ZM10.875 12.375H16.583V10.75H10.875ZM3.417 9H16.583V6.667H3.417Z" fill="#FFFFFF"/></svg>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title v-text="$t('banners')" />
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+
+      <v-list>
+        <v-list-item
+          to="/text"
+          router
+          exact
+        >
+        <v-list-item-action>
+          <svg width="12" height="16" viewBox="0 0 12 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 4C2.72386 4 2.5 4.22386 2.5 4.5C2.5 4.77614 2.72386 5 3 5H9C9.27614 5 9.5 4.77614 9.5 4.5C9.5 4.22386 9.27614 4 9 4H3Z" fill="white"/>
+            <path d="M2.5 6.5C2.5 6.22386 2.72386 6 3 6H9C9.27614 6 9.5 6.22386 9.5 6.5C9.5 6.77614 9.27614 7 9 7H3C2.72386 7 2.5 6.77614 2.5 6.5Z" fill="white"/>
+            <path d="M3 8C2.72386 8 2.5 8.22386 2.5 8.5C2.5 8.77614 2.72386 9 3 9H9C9.27614 9 9.5 8.77614 9.5 8.5C9.5 8.22386 9.27614 8 9 8H3Z" fill="white"/>
+            <path d="M3 10C2.72386 10 2.5 10.2239 2.5 10.5C2.5 10.7761 2.72386 11 3 11H6C6.27614 11 6.5 10.7761 6.5 10.5C6.5 10.2239 6.27614 10 6 10H3Z" fill="white"/>
+            <path d="M0 2C0 0.89543 0.895431 0 2 0H10C11.1046 0 12 0.89543 12 2V14C12 15.1046 11.1046 16 10 16H2C0.895431 16 0 15.1046 0 14V2ZM10 1H2C1.44772 1 1 1.44772 1 2V14C1 14.5523 1.44772 15 2 15H10C10.5523 15 11 14.5523 11 14V2C11 1.44772 10.5523 1 10 1Z" fill="white"/>
+          </svg>
+
+
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title v-text="$t('texts')" />
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+
+      
+
+      <v-list>
+        <v-list-item
+          to="/category"
+          router
+          exact
+        >
+          <v-list-item-action>
+            <svg  height="20" width="20"><path d="M2.5 9.125V2.5H9.125V9.125ZM2.5 17.5V10.875H9.125V17.5ZM10.875 9.125V2.5H17.5V9.125ZM10.875 17.5V10.875H17.5V17.5ZM4.25 7.375H7.375V4.25H4.25ZM12.625 7.375H15.75V4.25H12.625ZM12.625 15.75H15.75V12.625H12.625ZM4.25 15.75H7.375V12.625H4.25ZM12.625 7.375ZM12.625 12.625ZM7.375 12.625ZM7.375 7.375Z" fill="#FFFFFF"/></svg>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title v-text="$t('category')" />
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -188,46 +233,21 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
-
+      
       <v-list>
         <v-list-item
-          to="/gift"
+          to="/newProductDate"
           router
           exact
         >
         <v-list-item-action>
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M3 2.5C3 1.11929 4.11929 0 5.5 0C6.88071 0 8 1.11929 8 2.5C8 1.11929 9.11929 0 10.5 0C11.8807 0 13 1.11929 13 2.5L13 2.50557C13 2.57543 13.0001 2.77567 12.9622 3H15C15.5523 3 16 3.44772 16 4V5C16 5.55228 15.5523 6 15 6H1C0.447716 6 0 5.55229 0 5V4C0 3.44772 0.447715 3 1 3H3.03783C2.99987 2.77567 2.99996 2.57543 3 2.50557L3 2.5ZM4.06799 3H7V2.5C7 1.67157 6.32843 1 5.5 1C4.67157 1 4 1.67157 4 2.5C4 2.58475 4.00195 2.77351 4.04488 2.93094C4.05252 2.95895 4.06044 2.98186 4.06799 3ZM9 3H11.932C11.9396 2.98186 11.9475 2.95895 11.9551 2.93094C11.9981 2.77351 12 2.58475 12 2.5C12 1.67157 11.3284 1 10.5 1C9.67157 1 9 1.67157 9 2.5V3Z" fill="white"/>
-            <path d="M15 7V14.5C15 15.3284 14.3284 16 13.5 16H9V7H15Z" fill="white"/>
-            <path d="M2.5 16C1.67157 16 1 15.3284 1 14.5V7H7V16H2.5Z" fill="white"/>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 3.5C8 3.22386 7.77614 3 7.5 3C7.22386 3 7 3.22386 7 3.5V9C7 9.17943 7.09614 9.3451 7.25193 9.43412L10.7519 11.4341C10.9917 11.5711 11.2971 11.4878 11.4341 11.2481C11.5711 11.0083 11.4878 10.7029 11.2481 10.5659L8 8.70984V3.5Z" fill="white" stroke="white"/>
+            <path d="M8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16ZM15 8C15 11.866 11.866 15 8 15C4.13401 15 1 11.866 1 8C1 4.13401 4.13401 1 8 1C11.866 1 15 4.13401 15 8Z" fill="white" stroke= 'white'/>
           </svg>
-
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title v-text="$t('gift')" />
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-
-      <v-list>
-        <v-list-item
-          to="/text"
-          router
-          exact
-        >
-        <v-list-item-action>
-          <svg width="12" height="16" viewBox="0 0 12 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M3 4C2.72386 4 2.5 4.22386 2.5 4.5C2.5 4.77614 2.72386 5 3 5H9C9.27614 5 9.5 4.77614 9.5 4.5C9.5 4.22386 9.27614 4 9 4H3Z" fill="white"/>
-            <path d="M2.5 6.5C2.5 6.22386 2.72386 6 3 6H9C9.27614 6 9.5 6.22386 9.5 6.5C9.5 6.77614 9.27614 7 9 7H3C2.72386 7 2.5 6.77614 2.5 6.5Z" fill="white"/>
-            <path d="M3 8C2.72386 8 2.5 8.22386 2.5 8.5C2.5 8.77614 2.72386 9 3 9H9C9.27614 9 9.5 8.77614 9.5 8.5C9.5 8.22386 9.27614 8 9 8H3Z" fill="white"/>
-            <path d="M3 10C2.72386 10 2.5 10.2239 2.5 10.5C2.5 10.7761 2.72386 11 3 11H6C6.27614 11 6.5 10.7761 6.5 10.5C6.5 10.2239 6.27614 10 6 10H3Z" fill="white"/>
-            <path d="M0 2C0 0.89543 0.895431 0 2 0H10C11.1046 0 12 0.89543 12 2V14C12 15.1046 11.1046 16 10 16H2C0.895431 16 0 15.1046 0 14V2ZM10 1H2C1.44772 1 1 1.44772 1 2V14C1 14.5523 1.44772 15 2 15H10C10.5523 15 11 14.5523 11 14V2C11 1.44772 10.5523 1 10 1Z" fill="white"/>
-          </svg>
-
-
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title v-text="$t('texts')" />
+            <v-list-item-title v-text="$t('newProductDate')" />
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -246,24 +266,6 @@
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title v-text="$t('profile')" />
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-      
-      <v-list>
-        <v-list-item
-          to="/newProductDate"
-          router
-          exact
-        >
-        <v-list-item-action>
-          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8 3.5C8 3.22386 7.77614 3 7.5 3C7.22386 3 7 3.22386 7 3.5V9C7 9.17943 7.09614 9.3451 7.25193 9.43412L10.7519 11.4341C10.9917 11.5711 11.2971 11.4878 11.4341 11.2481C11.5711 11.0083 11.4878 10.7029 11.2481 10.5659L8 8.70984V3.5Z" fill="white" stroke="white"/>
-            <path d="M8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16ZM15 8C15 11.866 11.866 15 8 15C4.13401 15 1 11.866 1 8C1 4.13401 4.13401 1 8 1C11.866 1 15 4.13401 15 8Z" fill="white" stroke= 'white'/>
-          </svg>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title v-text="$t('newProductDate')" />
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -376,3 +378,42 @@ export default {
   },
 }
 </script>
+
+<style>
+.custom-loader {
+    animation: loader 1s infinite;
+    display: flex;
+  }
+  @-moz-keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @-webkit-keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @-o-keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+</style>

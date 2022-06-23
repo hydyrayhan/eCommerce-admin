@@ -56,4 +56,13 @@ export default {
   brandAddError:"Brand goshmak ucin ilki kategory doredin",
   productAddError:"Product goshmak ucin ilki kategory we brand doreding",
   download:"Skachat",
+  profile : "Profile",
+  username: "User name",
+  password: "kone Achar sozi",
+  newPassword:"Taze achar sozi",
+  newPasswordConfirm:"Taze taze achar sozi",
+  newProductDate:"Taze haryt guni",
+  pass:"Пароль",
+  wellcomeBack:"Добро пожаловать обратно",
+  fillFree:"Заполните пустое полe",
 }
