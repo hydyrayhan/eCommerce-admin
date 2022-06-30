@@ -65,4 +65,5 @@ export default {
   pass:"Пароль",
   wellcomeBack:"Добро пожаловать обратно",
   fillFree:"Заполните пустое полe",
+  chat:"Chat",
 }

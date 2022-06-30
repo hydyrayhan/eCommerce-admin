@@ -270,6 +270,26 @@
         </v-list-item>
       </v-list>
 
+      <v-list>
+        <v-list-item
+          to="/chat"
+          router
+          exact
+        >
+        <v-list-item-action>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 1C14.5523 1 15 1.44772 15 2V10C15 10.5523 14.5523 11 14 11H4.41421C3.88378 11 3.37507 11.2107 3 11.5858L1 13.5858V2C1 1.44772 1.44772 1 2 1H14ZM2 0C0.895431 0 0 0.895431 0 2V14.7929C0 15.2383 0.53857 15.4614 0.853553 15.1464L3.70711 12.2929C3.89464 12.1054 4.149 12 4.41421 12H14C15.1046 12 16 11.1046 16 10V2C16 0.895431 15.1046 0 14 0H2Z" fill="white"/>
+            <path d="M5 6C5 6.55228 4.55228 7 4 7C3.44772 7 3 6.55228 3 6C3 5.44772 3.44772 5 4 5C4.55228 5 5 5.44772 5 6Z" fill="white"/>
+            <path d="M9 6C9 6.55228 8.55229 7 8 7C7.44772 7 7 6.55228 7 6C7 5.44772 7.44772 5 8 5C8.55229 5 9 5.44772 9 6Z" fill="white"/>
+            <path d="M13 6C13 6.55228 12.5523 7 12 7C11.4477 7 11 6.55228 11 6C11 5.44772 11.4477 5 12 5C12.5523 5 13 5.44772 13 6Z" fill="white"/>
+          </svg>
+        </v-list-item-action>
+        <v-list-item-content>
+          <v-list-item-title  v-text="$t('chat')"/>
+        </v-list-item-content>
+        </v-list-item>
+      </v-list>
+
     </v-navigation-drawer>
     <!-- Header -->
     <v-app-bar :clipped-left="clipped" fixed app>
@@ -330,6 +350,7 @@
 
 <script>
 import { mapGetters , mapActions} from 'vuex'
+const notificationSound = require("@/assets/message.mp3").default;
 export default {
   name: 'DefaultLayout',
   middleware: 'admin-middleware',
@@ -340,6 +361,7 @@ export default {
       clipped: false,
       drawer: false,
       fixed: false,
+      notificationSound,
       items: [
         {
           action: 'mdi-ticket',
@@ -351,6 +373,15 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
+    }
+  },
+  head(){
+    return{
+        script:[
+          {
+            src: `${process.env.socketUrl}/socket.io/socket.io.js`,
+          },
+        ]
     }
   },
   created() {
@@ -366,7 +397,13 @@ export default {
       )
     },
   },
-  
+  mounted(){
+    const socket = io.connect(process.env.socketUrl,{secure:true})
+    socket.emit("admin-login");
+    socket.on("chat-message",(m)=>{
+      this.playSound();
+    })
+  },
   methods:{
     changeLanguage(language){
       this.$i18n.setLocale(language);
@@ -374,7 +411,11 @@ export default {
     },
     ...mapActions({
       languageFunc : 'language/fetchLanguage'
-    })
+    }),
+    playSound(){
+      const audio = new Audio(this.notificationSound);
+      audio.play();
+    }
   },
 }
 </script>

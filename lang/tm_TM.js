@@ -65,4 +65,5 @@ export default {
   pass:"Açar sözi",
   wellcomeBack:"Hoş geldiňiz",
   fillFree:"Boşluklary dolduryň",
+  chat:"Chat",
 }

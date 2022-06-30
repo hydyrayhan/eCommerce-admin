@@ -7,6 +7,9 @@ export default {
     host: process.env.HOST || '0.0.0.0',
     port: process.env.PORT || 4000,
   },
+  env:{
+    socketUrl: process.env.SERVER_URL,
+  },
 
 
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -30,30 +33,23 @@ export default {
     { src: '~/assets/sass/main.scss' },
   ],
 
-  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     {src:'~/plugins/redirect'},
     {src:'~/plugins/vue-confirm-dialog', mode: 'client'},
-    // {src:'~/plugins/vue-tinymce-editor', ssr:false}
-    // {src:'~/plugins/own-tiny', ssr: false},
     { src: '~/plugins/vue-quill-editor', mode: 'client' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
-  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-    // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
   ],
   moment: {
     defaultLocale: 'RU',
     locales: ['RU', 'TM'],
   },
-  // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     'cookie-universal-nuxt',
     '@nuxtjs/pwa',
@@ -82,8 +78,6 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    // baseURL: process.env.SERVER_URL || 'http://localhost:5000',
     baseURL: process.env.SERVER_URL || 'http://localhost:5000',
   },
 
@@ -108,10 +102,24 @@ export default {
 
   publicRuntimeConfig:{
     url:process.env.SERVER_URL || 'http://localhost:4000'
-  } 
-
-  // Build Configuration: https://go.nuxtjs.dev/config-build
-  // build: {
-  //   vendor: ['tinymce', 'tinymce-vue-2'],
-  // },
+  } ,
+  build: {
+    loaders:{
+      sass:{
+        implementation:require('sass'),
+      },
+      scss:{
+        implementation:require('sass'),
+      }
+    },
+    extend(config, ctx) {
+      config.module.rules.push({
+        test: /\.(ogg|mp3|wav|mpe?g)$/i,
+        loader: 'file-loader',
+        options: {
+          name: '[path][name].[ext]'
+        }
+      })
+    }
+  },
 }
