@@ -47,7 +47,9 @@ export default {
   middleware({ app, redirect }) {
     const admin = app.store.getters['admin/admin'] || app.$cookies.get('admin')
 
-    if (admin) redirect('/')
+    if (admin){
+      redirect('/')
+    } 
   },
 
   data: () => ({

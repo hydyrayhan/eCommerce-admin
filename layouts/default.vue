@@ -350,6 +350,7 @@
 
 <script>
 import { mapGetters , mapActions} from 'vuex'
+import io from "socket.io-client";
 const notificationSound = require("@/assets/message.mp3").default;
 export default {
   name: 'DefaultLayout',
